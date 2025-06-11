@@ -18,14 +18,21 @@ import jakarta.persistence.InheritanceType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
+@RequiredArgsConstructor
 public class User {
 	
+   public User(UUID userId2, String userName2, int age2, String bloodGroup2, int phoneNo2, String email2,
+			String password2, Role role2) {
+		// TODO Auto-generated constructor stub
+	}
+
    @Id
    @GeneratedValue
    @UuidGenerator

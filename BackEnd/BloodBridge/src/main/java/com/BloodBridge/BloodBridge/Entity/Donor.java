@@ -8,10 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "userId")
 @Data
+@SuperBuilder
+@RequiredArgsConstructor
 public class Donor extends User{
 	
 	Donor(UUID userId, String userName, int age, String bloodGroup, int phoneNo, String email, String password,
