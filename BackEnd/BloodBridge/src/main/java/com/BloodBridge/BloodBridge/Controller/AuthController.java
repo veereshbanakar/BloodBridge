@@ -49,7 +49,8 @@ public class AuthController {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong !");
 		}
 		
 		 
@@ -60,7 +61,7 @@ public class AuthController {
 	public ResponseEntity<String> registerUser(@RequestBody Donor registerRequest){
 		
 		try {
-			 if(userService.userExits(registerRequest.getEmail()) != null)
+			 if(userService.userExits(registerRequest.getUser().getEmail()) != null)
 				 return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exits");
 			 donorService.registerDonor(registerRequest);
 			 return ResponseEntity.status(HttpStatus.CREATED).body("Registration succesfully");
@@ -71,6 +72,7 @@ public class AuthController {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
 		}
 		

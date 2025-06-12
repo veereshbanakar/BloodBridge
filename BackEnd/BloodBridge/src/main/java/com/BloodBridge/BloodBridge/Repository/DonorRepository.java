@@ -11,6 +11,6 @@ import com.BloodBridge.BloodBridge.Entity.User;
 @Repository
 public interface DonorRepository extends JpaRepository<Donor, UUID> {
 
-	void save(User donor);
+	
 
 }

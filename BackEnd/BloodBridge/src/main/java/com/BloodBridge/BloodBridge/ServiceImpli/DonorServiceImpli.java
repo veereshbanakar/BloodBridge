@@ -24,18 +24,15 @@ public class DonorServiceImpli implements DonorService {
 	@Override
 	public void registerDonor(Donor registerRequest) {
 		
+		   User user = registerRequest.getUser();
 
-		User donor=Donor.builder().userName(registerRequest.getUserName())
-                .age(registerRequest.getAge())
-                .bloodGroup(registerRequest.getBloodGroup())
-                .phoneNo(registerRequest.getPhoneNo())
-                .email(registerRequest.getEmail())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(Role.DONOR)
-                .medical_Certificate(registerRequest.getMedical_Certificate())
-                .availability(false)
-                .build();
-		donorRepository.save( donor);
+		    user.setRole(Role.DONOR);
+		    user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+		    registerRequest.setAvailability(false); // default
+		    registerRequest.setUser(user);
+
+		    donorRepository.save(registerRequest);
 		
 		
 	}

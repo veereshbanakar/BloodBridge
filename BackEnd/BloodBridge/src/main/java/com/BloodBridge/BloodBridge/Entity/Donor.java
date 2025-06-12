@@ -2,32 +2,34 @@ package com.BloodBridge.BloodBridge.Entity;
 
 import java.util.UUID;
 
-import com.BloodBridge.BloodBridge.Constants.Role;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.Table;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "userId")
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
-public class Donor extends User{
-	
-	Donor(UUID userId, String userName, int age, String bloodGroup, int phoneNo, String email, String password,
-			Role role) {
-		super(userId, userName, age, bloodGroup, phoneNo, email, password, role);
-		// TODO Auto-generated constructor stub
-	}
-	private String medical_Certificate;
-	private boolean availability;
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "Donor")
+public class Donor  {
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 	
-
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    private User user;
 	
-
+    private String medical_Certificate;
+    private boolean availability;
 }
