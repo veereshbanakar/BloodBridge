@@ -1,4 +1,4 @@
-package com.BloodBridge.BloodBridge.Entity;
+package com.BloodBridge.BloodBridge.entity;
 
 import java.util.UUID;
 
@@ -30,6 +30,6 @@ public class Donor  {
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private User user;
 	
-    private String medical_Certificate;
+    private String medicalCertificate;
     private boolean availability;
 }

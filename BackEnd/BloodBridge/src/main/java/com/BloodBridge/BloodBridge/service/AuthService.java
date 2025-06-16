@@ -1,8 +1,8 @@
-package com.BloodBridge.BloodBridge.Service;
+package com.BloodBridge.BloodBridge.service;
 
 import org.springframework.stereotype.Service;
 
-import com.BloodBridge.BloodBridge.Entity.User;
+import com.BloodBridge.BloodBridge.entity.User;
 
 
 public interface AuthService {

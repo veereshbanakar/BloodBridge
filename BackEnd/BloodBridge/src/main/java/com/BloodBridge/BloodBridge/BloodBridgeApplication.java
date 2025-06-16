@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.BloodBridge.BloodBridge.Service", "com.BloodBridge.BloodBridge.ServiceImpli",
-    "com.BloodBridge.BloodBridge.Controller", "com.BloodBridge.BloodBridge.Repository",
-    "com.BloodBridge.BloodBridge.Entity","com.BloodBridge.BloodBridge.Configuration"})
+@ComponentScan({"com.BloodBridge.BloodBridge.service", "com.BloodBridge.BloodBridge.serviceImpl",
+    "com.BloodBridge.BloodBridge.controller", "com.BloodBridge.BloodBridge.repository",
+    "com.BloodBridge.BloodBridge.entity","com.BloodBridge.BloodBridge.configuration"})
 public class BloodBridgeApplication {
 
 	public static void main(String[] args) {

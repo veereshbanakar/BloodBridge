@@ -1,4 +1,4 @@
-package com.BloodBridge.BloodBridge.Constants;
+package com.BloodBridge.BloodBridge.valueObjects;
 
 public enum Role {
 	

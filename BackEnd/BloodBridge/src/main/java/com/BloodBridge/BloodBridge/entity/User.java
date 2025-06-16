@@ -1,10 +1,10 @@
-package com.BloodBridge.BloodBridge.Entity;
+package com.BloodBridge.BloodBridge.entity;
 
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
-import com.BloodBridge.BloodBridge.Constants.Role;
+import com.BloodBridge.BloodBridge.valueObjects.Role;
 
 import jakarta.persistence.*;
 import lombok.*;
