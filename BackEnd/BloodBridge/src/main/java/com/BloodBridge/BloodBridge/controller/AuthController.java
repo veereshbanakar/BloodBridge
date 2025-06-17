@@ -1,4 +1,4 @@
-package com.BloodBridge.BloodBridge.Controller;
+package com.BloodBridge.BloodBridge.controller;
 
 import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.Map;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.BloodBridge.BloodBridge.Entity.Donor;
-import com.BloodBridge.BloodBridge.Entity.User;
-import com.BloodBridge.BloodBridge.Service.AuthService;
-import com.BloodBridge.BloodBridge.Service.DonorService;
-import com.BloodBridge.BloodBridge.Service.userService;
+import com.BloodBridge.BloodBridge.entity.Donor;
+import com.BloodBridge.BloodBridge.entity.User;
+import com.BloodBridge.BloodBridge.service.AuthService;
+import com.BloodBridge.BloodBridge.service.DonorService;
+import com.BloodBridge.BloodBridge.service.userService;
 
 
 @RestController
@@ -24,7 +24,7 @@ import com.BloodBridge.BloodBridge.Service.userService;
 public class AuthController {
 	
 	@Autowired
-	AuthService service;
+	AuthService authservice;
 	
 	@Autowired
 	userService userService;
@@ -40,7 +40,7 @@ public class AuthController {
 		try {
 			 if(userService.userExits(registerRequest.getEmail()) != null)
 				 return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exits");
-			 service.registerUser(registerRequest);
+			 authservice.registerUser(registerRequest);
 			 return ResponseEntity.status(HttpStatus.CREATED).body("Registration succesfully");
 		}
 		catch (IllegalArgumentException e) {

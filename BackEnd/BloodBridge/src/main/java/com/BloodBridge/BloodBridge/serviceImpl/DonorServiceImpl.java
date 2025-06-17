@@ -1,10 +1,10 @@
-package com.BloodBridge.BloodBridge.ServiceImpli;
+package com.BloodBridge.BloodBridge.serviceImpl;
 
-import com.BloodBridge.BloodBridge.Constants.Role;
-import com.BloodBridge.BloodBridge.Entity.Donor;
-import com.BloodBridge.BloodBridge.Entity.User;
-import com.BloodBridge.BloodBridge.Repository.DonorRepository;
-import com.BloodBridge.BloodBridge.Service.DonorService;
+import com.BloodBridge.BloodBridge.entity.Donor;
+import com.BloodBridge.BloodBridge.entity.User;
+import com.BloodBridge.BloodBridge.repository.DonorRepository;
+import com.BloodBridge.BloodBridge.service.DonorService;
+import com.BloodBridge.BloodBridge.valueObjects.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class DonorServiceImpli implements DonorService {
+public class DonorServiceImpl implements DonorService {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;

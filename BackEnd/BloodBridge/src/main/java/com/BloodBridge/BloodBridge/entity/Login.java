@@ -1,4 +1,4 @@
-package com.BloodBridge.BloodBridge.Entity;
+package com.BloodBridge.BloodBridge.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

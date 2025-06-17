@@ -1,8 +1,8 @@
-package com.BloodBridge.BloodBridge.Service;
+package com.BloodBridge.BloodBridge.service;
 
 import org.springframework.stereotype.Service;
 
-import com.BloodBridge.BloodBridge.Entity.Donor;
+import com.BloodBridge.BloodBridge.entity.Donor;
 
 
 public interface DonorService {
