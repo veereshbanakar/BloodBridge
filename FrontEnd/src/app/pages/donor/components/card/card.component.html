@@ -1,7 +1,5 @@
 <div class="mt-4">
-  <div
-    class="border rounded-xl p-5 sm:w-[50%] md:w-[50%] lg:w-[30%] bg-gray-100 border-gray-300 shadow"
-  >
+  <div class="border rounded-xl p-5 bg-gray-100 border-gray-300 shadow">
     <div class="flex justify-between items-center">
       <div class="bg-red-500 text-xl text-white font-bold px-4 rounded-2xl">
         A+
@@ -12,20 +10,25 @@
         URGENT
       </div>
     </div>
-    <p class="text-xl font-semibold mt-3">Emergency Surgery Required</p>
-    <p class="text-slate-600">
-      Patient needs immediate blood transfusion for emergency surgery. Critical
-      condition.
-    </p>
+    <div class="md:flex md:justify-between md:items-center">
+      <div>
+        <p class="mt-2 font-bold">Varun</p>
+        <p class="text-xl font-semibold">Emergency Surgery Required</p>
+        <p class="text-slate-600">
+          Patient needs immediate blood transfusion for emergency surgery.
+          Critical condition.
+        </p>
+      </div>
+      <button
+        class="cursor-pointer bg-red-700  text-white rounded-4xl mt-2 p-2 w-[100%] md:w-[auto]"
+      >
+        Accept Request
+      </button>
+    </div>
 
     <div class="flex justify-between mt-2">
       <p>📍City Hospital</p>
       <p>⏰ 2 hours ago</p>
     </div>
-    <button
-      class="cursor-pointer bg-red-700 w-[100%] text-white rounded-4xl mt-2 py-2"
-    >
-      Accept Request
-    </button>
   </div>
 </div>
