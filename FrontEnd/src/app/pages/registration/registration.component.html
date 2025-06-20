@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+    <h2 class="text-3xl font-bold text-center text-red-700 mb-6">Register</h2>
+
+    
+    <div class="flex justify-center mb-6 space-x-2">
+      <button
+        (click)="selectedType = 'donor'"
+        [ngClass]="{
+          'bg-red-600 text-white': selectedType === 'donor',
+          'bg-red-200 text-red-700': selectedType !== 'donor'
+        }"
+        class="px-4 py-2 rounded-l-md transition-colors duration-300 font-semibold"
+      >
+        Donor
+      </button>
+      <button
+        (click)="selectedType = 'recipient'"
+        [ngClass]="{
+          'bg-red-600 text-white': selectedType === 'recipient',
+          'bg-red-200 text-red-700': selectedType !== 'recipient'
+        }"
+        class="px-4 py-2 rounded-r-md transition-colors duration-300 font-semibold"
+      >
+        Recipient
+      </button>
+    </div>
+
+    
+    <form *ngIf="selectedType === 'donor'" (ngSubmit)="submitForm()" #donorForm="ngForm" class="space-y-4">
+      <input type="text" placeholder="Name" class="input" name="name" ngModel required />
+      <input type="email" placeholder="Email" class="input" name="email" ngModel required />
+      <input type="password" placeholder="Password" class="input" name="password" ngModel required />
+      <input type="text" placeholder="Blood Group" class="input" name="bloodGroup" ngModel required />
+      <input type="text" placeholder="Address" class="input" name="address" ngModel required />
+      <input type="tel" placeholder="Phone Number" class="input" name="phone" ngModel required />
+
+      <label class="block text-sm font-medium text-gray-700">Medical Certificate</label>
+      <input type="file" (change)="onFileSelected($event)" class="w-full text-sm text-gray-600" />
+
+      <button type="submit" class="btn-red">Register as Donor</button>
+    </form>
+
+    
+    <form *ngIf="selectedType === 'recipient'" (ngSubmit)="submitForm()" #recipientForm="ngForm" class="space-y-4">
+      <input type="text" placeholder="Name" class="input" name="name" ngModel required />
+      <input type="email" placeholder="Email" class="input" name="email" ngModel required />
+      <input type="password" placeholder="Password" class="input" name="password" ngModel required />
+      <input type="tel" placeholder="Phone Number" class="input" name="phone" ngModel required />
+      <input type="text" placeholder="Address" class="input" name="address" ngModel required />
+
+      <button type="submit" class="btn-red">Register as Recipient</button>
+    </form>
+  </div>
+</div>
