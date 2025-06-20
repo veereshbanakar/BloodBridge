@@ -54,8 +54,8 @@
       >
         <li>
           <a
-            href="donor/dashboard"
-            class="block py-2 px-3 rounded-sm md:bg-transparent md:p-0 md:hover:text-[#C0392B] "
+            href="recipient/dashboard"
+            class="block py-2 px-3 rounded-sm md:bg-transparent md:p-0 md:hover:text-[#C0392B]"
             [class.text-[#C0392B]]="homeIsActive"
             aria-current="page"
             >Home</a
@@ -63,18 +63,18 @@
         </li>
         <li>
           <a
-            href="donor/response"
-            [class.text-[#C0392B]]="responseIsActive"
-            class="block py-2 px-3  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#C0392B] md:p-0"
-            >My Response</a
+            href="recipient/donors"
+            [class.text-[#C0392B]]="donorsIsActive"
+            class="block py-2 px-3 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#C0392B] md:p-0"
+            >Donors</a
           >
         </li>
         <li>
           <a
-          [class.text-[#C0392B]]="profileIsActive"
-            href="donor/profile"
+            [class.text-[#C0392B]]="responseIsActive"
+            href="recipient/responsebydonor"
             class="block py-2 px-3 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#C0392B] md:p-0"
-            >My Profile</a
+            >Donor Response</a
           >
         </li>
       </ul>

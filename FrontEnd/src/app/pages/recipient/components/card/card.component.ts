@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { BloodRequest } from '../../../../shared/BloodRequest.model';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -8,5 +7,5 @@ import { BloodRequest } from '../../../../shared/BloodRequest.model';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  @Input() request!: BloodRequest;
+
 }
