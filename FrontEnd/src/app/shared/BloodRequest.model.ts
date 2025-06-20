@@ -1,5 +1,6 @@
-interface BloodRequest{
+export interface BloodRequest{
     id: number,
+    name:string,
     bloodType: string,
     urgency: string,
     title: string,

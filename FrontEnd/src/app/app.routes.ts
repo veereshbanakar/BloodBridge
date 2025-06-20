@@ -5,6 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { DonorResponseComponent } from './pages/donor/donor-response/donor-response.component';
 import { DonorProfileComponent } from './pages/donor/donor-profile/donor-profile.component';
 import { DonorEditprofileComponent } from './pages/donor/donor-editprofile/donor-editprofile.component';
+import { DonorsComponent } from './pages/recipient/donors/donors.component';
+import { DonorsResponsesComponent } from './pages/recipient/donors-responses/donors-responses.component';
 
 
 
@@ -28,6 +30,12 @@ export const routes: Routes = [
     {
         path: 'recipient/dashboard',
         component: RecipientDashboardComponent
+    },{
+        path: 'recipient/donors',
+        component: DonorsComponent
+    },{
+        path: 'recipient/responsebydonor',
+        component: DonorsResponsesComponent
     }
     ,
     {
