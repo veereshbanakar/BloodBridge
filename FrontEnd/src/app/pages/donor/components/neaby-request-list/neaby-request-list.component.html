@@ -3,5 +3,5 @@
     <p class="text-3xl font-semibold">Nearby Requests</p>
   </div>
 
-  <app-card></app-card>
+  <app-card *ngFor="let request of bloodRequests" [request]="request"></app-card>
 </div>

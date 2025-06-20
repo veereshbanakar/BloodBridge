@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import {ActivatedRoute} from "@angular/router"
 @Component({
-  selector: 'app-navbar-donor',
+  selector: 'app-navbar-recipient',
   imports: [],
-  templateUrl: './navbar-donor.component.html',
-  styleUrl: './navbar-donor.component.css'
+  templateUrl: './navbar-recipient.component.html',
+  styleUrl: './navbar-recipient.component.css'
 })
-export class NavbarDonorComponent implements OnInit{
+export class NavbarRecipientComponent implements OnInit {
   currentUrl: string = '';
-  home:string = 'donor/dashboard';
-  response:string = 'donor/response';
-  profile:string = 'donor/profile';
+  home:string = 'recipient/dashboard';
+  donors:string = 'recipient/donors';
+  response:string = 'recipient/responsebydonor';
 
   homeIsActive: boolean = false;
+  donorsIsActive: boolean = false;
   responseIsActive: boolean = false;
-  profileIsActive: boolean = false;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -30,11 +29,11 @@ export class NavbarDonorComponent implements OnInit{
     console.log(this.currentUrl+" -- "+ this.home);
     if(this.currentUrl==this.home){
       this.homeIsActive= !this.homeIsActive;
-    }else if(this.currentUrl==this.response){
-      this.responseIsActive = !this.responseIsActive;
+    }else if(this.currentUrl==this.donors){
+      this.donorsIsActive = !this.donorsIsActive;
     }
-    else if(this.currentUrl = this.profile){
-      this.profileIsActive = !this.profileIsActive;
+    else if(this.currentUrl = this.response){
+      this.responseIsActive = !this.responseIsActive;
     }
   }
 }
