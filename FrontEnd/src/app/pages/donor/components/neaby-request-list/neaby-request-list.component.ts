@@ -12,6 +12,7 @@ import { CardComponent } from '../card/card.component';
   styleUrl: './neaby-request-list.component.css'
 })
 export class NeabyRequestListComponent {
+  
   bloodRequests: BloodRequest[] = [
     {
       id: 1,
