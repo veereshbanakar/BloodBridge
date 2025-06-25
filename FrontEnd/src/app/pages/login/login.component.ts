@@ -11,9 +11,13 @@ export class LoginComponent {
 loginData = {
     email: '',
     password: '',
-    role:''
+    role:'',
+    
 };
-
+activeForm: 'login'| 'register'='register';
+toggleForm( form:'login' |'register'){
+      this.activeForm =form;
+    }
 onSubmit() {
     
     console.log('Login submitted:', this.loginData);
