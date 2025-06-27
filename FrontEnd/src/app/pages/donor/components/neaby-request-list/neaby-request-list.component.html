@@ -5,11 +5,11 @@
 
 
   <div class="mt-2">
-    <button class=" border px-3 py-1 rounded me-2" [ngClass]="{'bg-red-500': selectedFilter() === 'ALL','text-white':selectedFilter()==='ALL','bg-none': selectedFilter() !== 'ALL'}" (click)="filterBy('ALL')">ALL</button>
-    <button class=" border px-3 py-1 rounded me-2" [ngClass]="{'bg-red-500': selectedFilter() === 'LOW','text-white':selectedFilter()==='LOW','bg-none': selectedFilter() !== 'LOW'}" (click)="filterBy('LOW')">LOW</button>
-    <button class=" border px-3 py-1 rounded me-2" [ngClass]="{'bg-red-500': selectedFilter() === 'MEDIUM','text-white':selectedFilter()==='MEDIUM','bg-none': selectedFilter() !== 'MEDIUM'}" (click)="filterBy('MEDIUM')">MEDIUM</button>
-    <button class=" border px-3 py-1 rounded me-2" [ngClass]="{'bg-red-500': selectedFilter() === 'HIGH','text-white':selectedFilter()==='HIGH','bg-none': selectedFilter() !== 'HIGH'}" (click)="filterBy('HIGH')">HIGH</button>
-    <button class=" border px-3 py-1 rounded me-2" [ngClass]="{'bg-red-500': selectedFilter() === 'URGENT','text-white':selectedFilter()==='URGENT','bg-none': selectedFilter() !== 'URGENT'}" (click)="filterBy('URGENT')">URGENT</button>
+    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'ALL','text-white':selectedFilter()==='ALL','bg-none': selectedFilter() !== 'ALL'}" (click)="filterBy('ALL')">ALL</button>
+    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'LOW','text-white':selectedFilter()==='LOW','bg-none': selectedFilter() !== 'LOW'}" (click)="filterBy('LOW')">LOW</button>
+    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'MEDIUM','text-white':selectedFilter()==='MEDIUM','bg-none': selectedFilter() !== 'MEDIUM'}" (click)="filterBy('MEDIUM')">MEDIUM</button>
+    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'HIGH','text-white':selectedFilter()==='HIGH','bg-none': selectedFilter() !== 'HIGH'}" (click)="filterBy('HIGH')">HIGH</button>
+    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'URGENT','text-white':selectedFilter()==='URGENT','bg-none': selectedFilter() !== 'URGENT'}" (click)="filterBy('URGENT')">URGENT</button>
   </div>
   <div class="text-center p-5 bg-light rounded-4 shadow-sm mt-4" *ngIf="noRequestFound" style="color: #5B3711;">
     <i class="bi bi-emoji-frown fs-1 mb-3" style="color: #F77F00;"></i>
