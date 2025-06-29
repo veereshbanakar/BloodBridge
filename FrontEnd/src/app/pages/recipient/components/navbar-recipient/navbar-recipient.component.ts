@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router,RouterModule } from '@angular/router';
 import {ActivatedRoute} from "@angular/router"
 @Component({
   selector: 'app-navbar-recipient',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './navbar-recipient.component.html',
   styleUrl: './navbar-recipient.component.css'
 })
@@ -35,5 +36,10 @@ export class NavbarRecipientComponent implements OnInit {
     else if(this.currentUrl = this.response){
       this.responseIsActive = !this.responseIsActive;
     }
+  }
+
+  isNavbarOpen:boolean = false;
+  toggleNavbar(){
+    this.isNavbarOpen = !this.isNavbarOpen;
   }
 }

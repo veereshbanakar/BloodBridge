@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-donor',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './navbar-donor.component.html',
   styleUrl: './navbar-donor.component.css'
 })
@@ -37,4 +38,10 @@ export class NavbarDonorComponent implements OnInit{
       this.profileIsActive = !this.profileIsActive;
     }
   }
+  isNavbarOpen:boolean = false;
+  toggleNavbar(){
+    this.isNavbarOpen = !this.isNavbarOpen;
+  }
+
+
 }

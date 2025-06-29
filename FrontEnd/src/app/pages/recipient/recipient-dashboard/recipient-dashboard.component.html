@@ -1,12 +1,19 @@
 <app-navbar-recipient></app-navbar-recipient>
 
 <div class="mt-15 mx-[10%]">
-  <button class="bg-red-700 p-2 text-white rounded px-5 mt-7">
+  <button class="bg-red-700 p-2 text-white rounded px-5 mt-7"
+    (click)="showForm = true">
     New Request +
   </button>
 
   <h1 class="mt-3 text-2xl font-medium">My Requests</h1>
-
+  <app-my-request></app-my-request>
+  <app-my-request></app-my-request>
+  <app-my-request></app-my-request>
+  <app-new-request 
+  *ngIf="showForm"
+  (closeForm)="showForm = false">
+  </app-new-request>
 
 
 </div>
