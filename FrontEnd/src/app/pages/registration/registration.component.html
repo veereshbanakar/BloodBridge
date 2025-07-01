@@ -2,59 +2,193 @@
   <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
     <h2 class="text-3xl font-bold text-center text-red-700 mb-6">Register</h2>
 
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+      {{ successMessage }}
+    </div>
     
+    <!-- Type Selection Buttons -->
     <div class="flex justify-center mb-6 space-x-2">
       <button
-        (click)="selectedType = 'donor'"
+        (click)="selectedType = 'donor'; onTypeChange()"
         [ngClass]="{
           'bg-[#DC2626] text-white': selectedType === 'donor',
           'bg-red-200 text-red-700': selectedType !== 'donor'
         }"
         class="px-4 py-2 rounded-l-md transition-colors duration-300 font-semibold"
+        [disabled]="isLoading"
       >
         Donor
       </button>
       <button
-        (click)="selectedType = 'recipient'"
+        (click)="selectedType = 'recipient'; onTypeChange()"
         [ngClass]="{
           'bg-[#DC2626] text-white': selectedType === 'recipient',
           'bg-red-200 text-red-700': selectedType !== 'recipient'
         }"
         class="px-4 py-2 rounded-r-md transition-colors duration-300 font-semibold"
+        [disabled]="isLoading"
       >
         Recipient
       </button>
     </div>
 
-    
+    <!-- Donor Registration Form -->
     <form *ngIf="selectedType === 'donor'" (ngSubmit)="submitForm()" #donorForm="ngForm" class="space-y-4">
-      <input type="text" placeholder="Name" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="name" ngModel required />
-      <input type="email" placeholder="Email" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="email" ngModel required />
-      <input type="password" placeholder="Password" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="password" ngModel required />
-      <input type="text" placeholder="Blood Group" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="bloodGroup" ngModel required />
-      <input type="text" placeholder="Address" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="address" ngModel required />
-      <input type="tel" placeholder="Phone Number" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="phone" ngModel required />
+      <input 
+        type="text" 
+        placeholder="Name" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="name" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="email" 
+        placeholder="Email" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="email" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="password" 
+        placeholder="Password" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="password" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="text" 
+        placeholder="Blood Group" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="bloodGroup" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="text" 
+        placeholder="Address" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="address" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="tel" 
+        placeholder="Phone Number" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="phone" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
 
       <label class="block text-sm font-medium text-gray-700">Medical Certificate</label>
-      <input type="file" (change)="onFileSelected($event)" class="w-full text-sm text-gray-600 rounded" />
+      <input 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        class="w-full text-sm text-gray-600 rounded px-3 py-2 border border-gray-400 bg-gray-100" 
+        accept=".pdf,.jpg,.jpeg,.png"
+        [disabled]="isLoading"
+      />
 
-      <button type="submit" class=" bg-[#B91C1C] w-[100%] py-2 text-white rounded font-medium cursor-pointer">Register as Donor</button>
+      <button 
+        type="submit" 
+        class="bg-[#B91C1C] w-[100%] py-2 text-white rounded font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        [disabled]="isLoading || !donorForm.valid"
+      >
+        <span *ngIf="isLoading" class="mr-2">
+          <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </span>
+        {{ isLoading ? 'Registering...' : 'Register as Donor' }}
+      </button>
     </form>
 
-    
+    <!-- Recipient Registration Form -->
     <form *ngIf="selectedType === 'recipient'" (ngSubmit)="submitForm()" #recipientForm="ngForm" class="space-y-4">
-      <input type="text" placeholder="Name" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="name" ngModel required />
-      <input type="email" placeholder="Email" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="email" ngModel required />
-      <input type="tel" placeholder="Phone Number" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="phone" ngModel required />
-      <input type="text" placeholder="Address" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="address" ngModel required />
-      <input type="password" placeholder="Password" class="input w-[100%] rounded bg-gray-100 border-gray-400" name="password" ngModel required />
+      <input 
+        type="text" 
+        placeholder="Name" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="name" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="email" 
+        placeholder="Email" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="email" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="tel" 
+        placeholder="Phone Number" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="phone" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="text" 
+        placeholder="Address" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="address" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
+      <input 
+        type="password" 
+        placeholder="Password" 
+        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border" 
+        name="password" 
+        ngModel 
+        required 
+        [disabled]="isLoading"
+      />
 
-      <button type="submit" class="bg-[#B91C1C] w-[100%] py-2 text-white rounded font-medium cursor-pointer">Register as Recipient</button>
-    
-    
+      <button 
+        type="submit" 
+        class="bg-[#B91C1C] w-[100%] py-2 text-white rounded font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        [disabled]="isLoading || !recipientForm.valid"
+      >
+        <span *ngIf="isLoading" class="mr-2">
+          <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </span>
+        {{ isLoading ? 'Registering...' : 'Register as Recipient' }}
+      </button>
     </form>
-    <div class=" flex justify-center">
-     <p class=" text-sm mt-1 text-gray-700">Already have an account? <span class=" text-red-600 font-medium hover:underline"> <a routerLink="/login">Sign in</a></span></p>
+    
+    <div class="flex justify-center">
+      <p class="text-sm mt-1 text-gray-700">
+        Already have an account? 
+        <span class="text-red-600 font-medium hover:underline"> 
+          <a routerLink="/login">Sign in</a>
+        </span>
+      </p>
     </div>
   </div>
 </div>

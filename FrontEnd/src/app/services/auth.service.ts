@@ -31,6 +31,32 @@ export interface LoginResponse {
   donor?: User;     // for donor login (if different structure)
   status: string;
 }
+// Interface for registration response
+export interface RegistrationResponse {
+  status: string;
+  message: string;
+  user?: User;
+  token?: string;
+}
+// Interface for donor registration request
+export interface DonorRegistrationRequest {
+  name: string;
+  email: string;
+  password: string;
+  bloodGroup: string;
+  address: string;
+  phone: string;
+  medicalCertificate?: File;
+}
+
+// Interface for recipient registration request
+export interface RecipientRegistrationRequest {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +72,58 @@ export class AuthService {
   constructor(private http: HttpClient) {
     // Check if user is already logged in on service initialization
     this.loadUserFromStorage();
+  }
+  registerDonor(registrationData: DonorRegistrationRequest): Observable<RegistrationResponse> {
+    const formData = new FormData();
+    
+    // Append all form data
+    formData.append('name', registrationData.name);
+    formData.append('email', registrationData.email);
+    formData.append('password', registrationData.password);
+    formData.append('blood_group', registrationData.bloodGroup);
+    formData.append('location', registrationData.address);
+    formData.append('phone', registrationData.phone);
+    
+    // Append file if provided
+    if (registrationData.medicalCertificate) {
+      formData.append('medicalCertificate', registrationData.medicalCertificate);
+    }
+
+    return this.http.post<RegistrationResponse>(`${this.baseUrl}/register-donor`, formData)
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          console.error('Donor registration error:', error);
+          return throwError(() => error);
+        })
+      );
+  }
+
+  registerRecipient(registrationData: RecipientRegistrationRequest): Observable<RegistrationResponse> {
+    const requestData = {
+      name: registrationData.name,
+      email: registrationData.email,
+      phone: registrationData.phone,
+      location: registrationData.address, // mapping address to location as per backend structure
+      password: registrationData.password
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<RegistrationResponse>(`${this.baseUrl}/signup-receiver`, requestData, { headers })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          console.error('Recipient registration error:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   // Login method

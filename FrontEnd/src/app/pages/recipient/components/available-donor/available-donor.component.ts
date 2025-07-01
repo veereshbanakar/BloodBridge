@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Donor } from '../../../../services/recipient.service';
 
 @Component({
   selector: 'app-available-donor',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AvailableDonorComponent {
 
+  @Input() donor!: Donor;
 }

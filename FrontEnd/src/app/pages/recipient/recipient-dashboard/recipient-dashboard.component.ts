@@ -8,7 +8,7 @@ import { MyRequestComponent } from '../components/my-request/my-request.componen
 @Component({
   selector: 'app-recipient-dashboard',
   standalone: true,
-  imports: [CommonModule, NavbarRecipientComponent, CardComponent, NewRequestComponent, MyRequestComponent],
+  imports: [CommonModule, NavbarRecipientComponent, NewRequestComponent, MyRequestComponent],
   templateUrl: './recipient-dashboard.component.html',
   styleUrl: './recipient-dashboard.component.css'
 })

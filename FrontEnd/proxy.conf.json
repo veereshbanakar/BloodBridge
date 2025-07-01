@@ -1,0 +1,12 @@
+{
+  "/api/*": {
+    "target": "https://blood-bridge-server.onrender.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }
+  }
+}
