@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NewRequestComponent {
   @Output() closeForm = new EventEmitter<void>();
-  showConfirm = false; 
+  showConfirm = false;
   onCloseClick(): void {
     this.showConfirm = true;
   }

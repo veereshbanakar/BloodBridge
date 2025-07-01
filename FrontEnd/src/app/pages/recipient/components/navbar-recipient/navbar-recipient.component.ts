@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
 import {ActivatedRoute} from "@angular/router"
+import { AuthService } from '../../../../services/auth.service';
+
 @Component({
   selector: 'app-navbar-recipient',
   imports: [RouterModule],
@@ -17,7 +19,10 @@ export class NavbarRecipientComponent implements OnInit {
   donorsIsActive: boolean = false;
   responseIsActive: boolean = false;
 
-  constructor(private route: ActivatedRoute) {}
+   constructor(private route: ActivatedRoute,
+      private authService: AuthService,
+      private router: Router
+    ) {}
 
   ngOnInit() {
     // Using snapshot (gets the URL at the time of component initialization)
@@ -41,5 +46,9 @@ export class NavbarRecipientComponent implements OnInit {
   isNavbarOpen:boolean = false;
   toggleNavbar(){
     this.isNavbarOpen = !this.isNavbarOpen;
+  }
+   handleLogout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
