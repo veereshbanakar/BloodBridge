@@ -2,24 +2,22 @@
 <div class="mx-[10%] md:mx-40">
   <h1 class="text-3xl font-semibold mt-15">Available Donors</h1>
   
-  <!-- Loading state -->
+
   <div *ngIf="loading" class="flex justify-center items-center py-8">
     <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
     <span class="ml-2">Loading donors...</span>
   </div>
 
-  <!-- Error state -->
   <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4">
     {{ error }}
     <button (click)="loadDonors()" class="ml-4 underline hover:no-underline">Try Again</button>
   </div>
 
-  <!-- No donors found -->
+
   <div *ngIf="!loading && !error && donors.length === 0" class="text-center py-8 text-gray-600">
     <p>No available donors found.</p>
   </div>
 
-  <!-- Donors list -->
   <div *ngIf="!loading && !error && donors.length > 0">
     <app-available-donor 
       *ngFor="let donor of donors; trackBy: trackByDonorId"

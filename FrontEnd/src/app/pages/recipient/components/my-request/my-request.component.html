@@ -2,23 +2,19 @@
   <div class="border rounded-xl p-5 bg-gray-100 border-gray-300 shadow">
     <div class="flex justify-between items-center">
       <div class="bg-red-500 text-xl text-white font-bold px-4 rounded-2xl">
-        A+
+        {{request.bloodGroup}}
       </div>
       <div class="border-0 rounded-2xl py-1 bg-amber-200 font-bold text-red-400 px-2">
-        URGENT
+        {{request.urgencyLevel}}
       </div>
     </div>
 
     <div class="mt-2">
-      <p class="text-xl font-bold"><i>Prabhanshu</i> : Emergency Surgery Required</p>
-      <p class="text-slate-600">
-        Patient needs immediate blood transfusion for emergency surgery. Critical condition.
-      </p>
+      <p class="text-xl font-bold"><i>{{request.receiverName}}</i> : {{request.reason}}</p>
     </div>
 
     <div class="flex justify-between mt-2 text-md">
-      <p>📍 City Hospital</p>
-      <p>⏰ 2 hours ago</p>
+      <p>📍 {{request.hospitalName}}, {{request.hospitalAddress}}</p>
     </div>
   </div>
 </div>

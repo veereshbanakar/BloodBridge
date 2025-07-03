@@ -7,10 +7,28 @@
   </button>
 
   <h1 class="mt-3 text-2xl font-medium">My Requests</h1>
-  <app-my-request></app-my-request>
-  <app-my-request></app-my-request>
-  <app-my-request></app-my-request>
-  <app-new-request 
+   
+   <div *ngIf="loading" class="flex justify-center items-center py-8">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+    <span class="ml-2">Loading Requests...</span>
+  </div>
+
+ 
+  <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4">
+    {{ error }}
+    <button (click)="loadRequests()" class="ml-4 underline hover:no-underline">Try Again</button>
+  </div>
+
+
+  <div *ngIf="!loading && !error && requests.length === 0" class="text-center py-8 text-gray-600">
+    <p>No Requests found.</p>
+  </div>
+  <div *ngIf = "!loading && !error && requests.length > 0">
+    <app-my-request
+      *ngFor="let request of requests; trackBy:trackByRequestId"
+      [request]="request"></app-my-request>
+  </div>
+  <app-new-request
   *ngIf="showForm"
   (closeForm)="showForm = false">
   </app-new-request>

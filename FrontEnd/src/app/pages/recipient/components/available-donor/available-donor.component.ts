@@ -8,6 +8,5 @@ import { Donor } from '../../../../services/recipient.service';
   styleUrl: './available-donor.component.css'
 })
 export class AvailableDonorComponent {
-
   @Input() donor!: Donor;
 }

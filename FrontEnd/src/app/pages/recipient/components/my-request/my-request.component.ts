@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Request } from '../../../../services/recipient.service';
 
 @Component({
   selector: 'app-my-request',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './my-request.component.css'
 })
 export class MyRequestComponent {
-
+ @Input() request!:Request;
 }
