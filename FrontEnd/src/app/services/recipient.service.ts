@@ -37,6 +37,20 @@ export interface Request {
   status: string,
   acceptedBy: string
 }
+export interface BloodRequest {
+  bloodGroup: string;
+  urgencyLevel: string;
+  hospitalName: string;
+  hospitalAddress: string;
+  contactNumber: string;
+  reason: string;
+  status: string;
+}
+
+export interface BloodRequestResponse {
+  message?: string;
+  status?: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +70,6 @@ export class RecipientService {
 
   getAllDonors(): Observable<DonorResponse> {
     const headers = this.getAuthHeaders();
-    console.log("anish error--"+ headers);
-
     return this.http.get<DonorResponse>(`${this.apiUrl}/get-all-donors`,{ headers });
   }
 
@@ -65,4 +77,10 @@ export class RecipientService {
     const headers = this.getAuthHeaders();
     return this.http.get<RequestResponse>(`${this.apiUrl}/viewallrequest`,{ headers })
   }
+
+  submitBloodRequest(bloodRequest: BloodRequest): Observable<BloodRequestResponse> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<BloodRequestResponse>(`${this.apiUrl}/requestingblood`, bloodRequest, { headers });
+  }
+
 }

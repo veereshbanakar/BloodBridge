@@ -1,4 +1,3 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -38,7 +37,6 @@ export class LoginComponent {
     if(this.loginData.role=="recipient"){
       this.authService.loginReciever(this.loginData).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
           this.successMessage = 'Login successful!';
           
           // Redirect based on user role
@@ -75,7 +73,6 @@ export class LoginComponent {
     else if(this.loginData.role=='donor'){
       this.authService.loginDonor(this.loginData).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
           this.successMessage = 'Login successful!';
           
           // Redirect based on user role
