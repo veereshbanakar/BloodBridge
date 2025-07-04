@@ -78,7 +78,6 @@ export class RegistrationComponent {
       bloodGroup: formData.bloodGroup,
       address: formData.address,
       phone: formData.phone,
-      medicalCertificate: this.selectedFile || undefined
     };
 
     this.authService.registerDonor(registrationData).subscribe({

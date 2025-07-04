@@ -46,7 +46,6 @@ export interface DonorRegistrationRequest {
   bloodGroup: string;
   address: string;
   phone: string;
-  medicalCertificate?: File;
 }
 
 // Interface for recipient registration request
@@ -83,13 +82,9 @@ export class AuthService {
     formData.append('blood_group', registrationData.bloodGroup);
     formData.append('location', registrationData.address);
     formData.append('phone', registrationData.phone);
-    
-    // Append file if provided
-    if (registrationData.medicalCertificate) {
-      formData.append('medicalCertificate', registrationData.medicalCertificate);
-    }
+    console.log("form data=="+formData);
 
-    return this.http.post<RegistrationResponse>(`${this.baseUrl}/register-donor`, formData)
+    return this.http.post<RegistrationResponse>(`${this.baseUrl}/signup-donor`, formData)
       .pipe(
         map(response => {
           return response;
