@@ -42,9 +42,10 @@ export interface RegistrationResponse {
 export interface DonorRegistrationRequest {
   name: string;
   email: string;
+  age: string;
   password: string;
-  bloodGroup: string;
-  address: string;
+  blood_group: string;
+  location: string;
   phone: string;
 }
 
@@ -73,18 +74,17 @@ export class AuthService {
     this.loadUserFromStorage();
   }
   registerDonor(registrationData: DonorRegistrationRequest): Observable<RegistrationResponse> {
-    const formData = new FormData();
-    
-    // Append all form data
-    formData.append('name', registrationData.name);
-    formData.append('email', registrationData.email);
-    formData.append('password', registrationData.password);
-    formData.append('blood_group', registrationData.bloodGroup);
-    formData.append('location', registrationData.address);
-    formData.append('phone', registrationData.phone);
-    console.log("form data=="+formData);
+    const requestData = {
+      name: registrationData.name,
+      email: registrationData.email,
+      phone: registrationData.phone,
+      age: registrationData.age,
+      location: registrationData.location,
+      password: registrationData.password,
+      blood_group: registrationData.blood_group,
+    };
 
-    return this.http.post<RegistrationResponse>(`${this.baseUrl}/signup-donor`, formData)
+    return this.http.post<RegistrationResponse>(`${this.baseUrl}/signup-donor`, requestData)
       .pipe(
         map(response => {
           return response;
@@ -101,7 +101,7 @@ export class AuthService {
       name: registrationData.name,
       email: registrationData.email,
       phone: registrationData.phone,
-      location: registrationData.address, // mapping address to location as per backend structure
+      location: registrationData.address,
       password: registrationData.password
     };
 

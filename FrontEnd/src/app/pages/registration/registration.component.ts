@@ -25,31 +25,6 @@ export class RegistrationComponent {
     private router: Router
   ) {}
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input?.files?.length) {
-      this.selectedFile = input.files[0];
-      
-      // Validate file type (optional)
-      const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
-      if (!allowedTypes.includes(this.selectedFile.type)) {
-        this.errorMessage = 'Please select a valid file (PDF, JPG, PNG)';
-        this.selectedFile = null;
-        input.value = '';
-        return;
-      }
-      
-      // Validate file size (5MB limit)
-      if (this.selectedFile.size > 5 * 1024 * 1024) {
-        this.errorMessage = 'File size should be less than 5MB';
-        this.selectedFile = null;
-        input.value = '';
-        return;
-      }
-      
-      this.errorMessage = '';
-    }
-  }
 
   submitForm() {
     this.errorMessage = '';
@@ -75,8 +50,9 @@ export class RegistrationComponent {
       name: formData.name,
       email: formData.email,
       password: formData.password,
-      bloodGroup: formData.bloodGroup,
-      address: formData.address,
+      age: formData.age,
+      blood_group: formData.bloodGroup,
+      location: formData.address,
       phone: formData.phone,
     };
 
