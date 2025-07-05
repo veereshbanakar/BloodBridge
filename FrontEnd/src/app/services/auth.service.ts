@@ -186,7 +186,7 @@ export class AuthService {
 
   // Check if user is logged in
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return !!localStorage.getItem('token');
   }
 
   // Get current user

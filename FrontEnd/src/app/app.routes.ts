@@ -10,36 +10,45 @@ import { DonorEditprofileComponent } from './pages/donor/donor-editprofile/donor
 import { DonorsComponent } from './pages/recipient/donors/donors.component';
 import { DonorsResponsesComponent } from './pages/recipient/donors-responses/donors-responses.component';
 import { NewRequestComponent } from './pages/recipient/components/new-request/new-request.component';
+import { authGuard } from './guard/auth.guard';
+import { authDonorGuard } from './guard/auth-donor.guard';
 
 
 
 export const routes: Routes = [
     {
         path: 'donor/dashboard',
-        component: DonorDashboardComponent
+        component: DonorDashboardComponent,
+        canActivate: [authDonorGuard]
     }
     ,
     {
         path: 'donor/response',
-        component: DonorResponseComponent
+        component: DonorResponseComponent,
+        canActivate: [authDonorGuard]
     },
     {
         path: 'donor/profile',
-        component: DonorProfileComponent
+        component: DonorProfileComponent,
+        canActivate: [authDonorGuard]
     },
     {
         path: 'donor/editprofile',
-        component: DonorEditprofileComponent
+        component: DonorEditprofileComponent,
+        canActivate: [authDonorGuard]
     },
     {
         path: 'recipient/dashboard',
-        component: RecipientDashboardComponent
+        component: RecipientDashboardComponent,
+        canActivate: [authGuard]
     },{
         path: 'recipient/donors',
-        component: DonorsComponent
+        component: DonorsComponent,
+        canActivate: [authGuard]
     },{
         path: 'recipient/responsebydonor',
-        component: DonorsResponsesComponent
+        component: DonorsResponsesComponent,
+        canActivate: [authGuard]
     }
     ,
     {
@@ -52,8 +61,9 @@ export const routes: Routes = [
         component: RegistrationComponent
     }
     ,
-    { 
-        path: 'recipient/new-request', 
-        component: NewRequestComponent 
+    {
+        path: 'recipient/new-request',
+        component: NewRequestComponent,
+        canActivate: [authGuard]
     }
 ];
