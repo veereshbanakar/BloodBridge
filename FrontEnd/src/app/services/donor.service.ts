@@ -3,6 +3,27 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 
+
+
+export interface BloodRequest {
+  id: string;
+  receiverId: string;
+  receiverName: string;
+  bloodGroup: string;
+  urgencyLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' | string;
+  hospitalName: string;
+  hospitalAddress: string;
+  contactNumber: string;
+  reason: string;
+  status: string;
+  acceptedBy: string | null;
+}
+export interface RequestResponse {
+  status: string;
+  donorSpecificRequests: BloodRequest[];
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,9 +41,12 @@ export class DonorService {
 
   updateAvailability(isAvailable: boolean): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.patch(`${this.baseUrl}/update-status?requestId=6865177d4eabd28a32fdd3b3&status=ACCEPTED`,{headers});
+    return this.http.get(`${this.baseUrl}/update-availability?isAvailable=${isAvailable}`,{headers});
   }
 
-
+  getRequestsForDonor(): Observable<RequestResponse>{
+    const headers = this.getAuthHeaders();
+    return this.http.get<RequestResponse>(`${this.baseUrl}/get-all-request`,{headers});
+  }
 
 }
