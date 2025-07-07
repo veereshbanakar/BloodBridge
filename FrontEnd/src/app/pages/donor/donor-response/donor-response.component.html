@@ -1,7 +1,25 @@
 <app-navbar-donor></app-navbar-donor>
 <div class="mx-[10%] md:mx-40">
-  <h1 class="text-3xl font-semibold mt-15">My Responses</h1>
-  <app-response-card></app-response-card>
-  <app-response-card></app-response-card>
+  <h1 class="text-3xl font-semibold mt-20">My Responses</h1>
+
+  <div *ngIf="isLoading" class="flex justify-center items-center py-8">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+    <span class="ml-2">Loading Responses</span>
+  </div>
+
+ 
+  <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4">
+    {{ error }}
+    <button (click)="loadRequest()" class="ml-4 underline hover:no-underline">Try Again</button>
+  </div>
+
+
+  <div *ngIf="!isLoading && !error && allresponses.length === 0" class="text-center py-8 text-gray-600">
+    <p>No Respnoses found.</p>
+  </div>
+
+  <div *ngFor="let responses of allresponses">
+    <app-response-card [responses]="responses"></app-response-card>
+  </div>
+  
 </div>
-<app-chatbot></app-chatbot>

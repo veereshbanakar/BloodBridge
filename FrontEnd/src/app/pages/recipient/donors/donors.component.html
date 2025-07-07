@@ -1,5 +1,5 @@
 <app-navbar-recipient></app-navbar-recipient>
-<div class="mx-[10%] md:mx-40">
+<div class="mx-[10%] md:mx-40 mt-20">
   <h1 class="text-3xl font-semibold mt-15">Available Donors</h1>
   
 
@@ -19,7 +19,7 @@
   </div>
 
   <div *ngIf="!loading && !error && donors.length > 0">
-    <app-available-donor 
+    <app-available-donor
       *ngFor="let donor of donors; trackBy: trackByDonorId"
       [donor]="donor">
     </app-available-donor>

@@ -15,9 +15,12 @@
         <p class="text-xl font-semibold"> <span class=" font-medium italic">{{request.receiverName}}</span> :{{ request.reason }}</p>
       </div>
       <button
-        class="cursor-pointer bg-red-700  text-white rounded-4xl mt-2 p-2 w-[100%] md:w-[auto]"
+        (click)="acceptRequest()"
+        [disabled]="isAccepting"
+        class="cursor-pointer bg-red-700  text-white rounded-4xl mt-2 p-2 w-[100%] md:w-[auto] flex items-center"
       >
-        Accept Request
+      <span *ngIf="isAccepting" class="inline-block w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        {{isAccepting? 'Accepting.....': 'Accept Request'}}
       </button>
     </div>
 

@@ -20,8 +20,7 @@ export const routes: Routes = [
         path: 'donor/dashboard',
         component: DonorDashboardComponent,
         canActivate: [authDonorGuard]
-    }
-    ,
+    },
     {
         path: 'donor/response',
         component: DonorResponseComponent,
@@ -53,6 +52,11 @@ export const routes: Routes = [
     ,
     {
         path: 'login',
+        component: LoginComponent
+    }
+    ,
+    {
+        path: '',
         component: LoginComponent
     }
     ,

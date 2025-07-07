@@ -22,7 +22,7 @@ export class NeabyRequestListComponent implements OnInit {
   constructor(private donorSevice: DonorService){}
   bloodRequests!:BloodRequest[];
 
-  selectedFilter = signal<'ALL'| 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'>('ALL');
+  selectedFilter = signal<'ALL'| 'LOW' | 'MEDIUM' | 'HIGH' | 'EMERGENCY'>('ALL');
   allBloodRequests: BloodRequest[] =[];
 
   loadRequests():void{
@@ -54,17 +54,15 @@ export class NeabyRequestListComponent implements OnInit {
     const filter = this.selectedFilter();
     
     if (filter === 'ALL') {
-      // console.log(filter);
       this.bloodRequests = [...this.allBloodRequests];
     } else {
       console.log(filter)
       this.bloodRequests = this.allBloodRequests.filter(d => d.urgencyLevel === filter);
     }
-    // console.log(this.donations)
     this.noRequestFound = this.bloodRequests.length === 0;
   }
 
-  filterBy(type:'ALL' | 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'){
+  filterBy(type:'ALL' | 'LOW' | 'MEDIUM' | 'HIGH' | 'EMERGENCY'){
     this.selectedFilter.set(type);
     this.applyFilter();
   }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { DonorResponse } from '../../../../services/donor.service';
 
 @Component({
   selector: 'app-response-card',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './response-card.component.css'
 })
 export class ResponseCardComponent {
-
+  @Input() responses!: DonorResponse;
 }

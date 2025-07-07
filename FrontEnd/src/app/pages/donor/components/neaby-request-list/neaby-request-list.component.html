@@ -1,29 +1,89 @@
 <div>
   <div>
-    <p class="text-3xl font-semibold">Nearby Requests</p>
+    <p class="text-3xl font-semibold">Requests</p>
   </div>
 
-
   <div class="mt-2">
-    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'ALL','text-white':selectedFilter()==='ALL','bg-none': selectedFilter() !== 'ALL'}" (click)="filterBy('ALL')">ALL</button>
-    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'LOW','text-white':selectedFilter()==='LOW','bg-none': selectedFilter() !== 'LOW'}" (click)="filterBy('LOW')">LOW</button>
-    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'MEDIUM','text-white':selectedFilter()==='MEDIUM','bg-none': selectedFilter() !== 'MEDIUM'}" (click)="filterBy('MEDIUM')">MEDIUM</button>
-    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'HIGH','text-white':selectedFilter()==='HIGH','bg-none': selectedFilter() !== 'HIGH'}" (click)="filterBy('HIGH')">HIGH</button>
-    <button class=" border px-3 py-1 rounded me-2 border-gray-500 text-gray-500" [ngClass]="{'bg-red-500': selectedFilter() === 'CRITICAL','text-white':selectedFilter()==='CRITICAL','bg-none': selectedFilter() !== 'CRITICAL'}" (click)="filterBy('CRITICAL')">CRITICAL</button>
+    <button
+      class="border px-3 my-1 py-1 rounded me-2 border-gray-500 text-gray-500"
+      [ngClass]="{
+        'bg-red-500': selectedFilter() === 'ALL',
+        'text-white': selectedFilter() === 'ALL',
+        'bg-none': selectedFilter() !== 'ALL'
+      }"
+      (click)="filterBy('ALL')"
+    >
+      ALL
+    </button>
+    <button
+      class="border px-3 my-1 py-1 rounded me-2 border-gray-500 text-gray-500"
+      [ngClass]="{
+        'bg-red-500': selectedFilter() === 'LOW',
+        'text-white': selectedFilter() === 'LOW',
+        'bg-none': selectedFilter() !== 'LOW'
+      }"
+      (click)="filterBy('LOW')"
+    >
+      LOW
+    </button>
+    <button
+      class="border px-3 my-1 py-1 rounded me-2 border-gray-500 text-gray-500"
+      [ngClass]="{
+        'bg-red-500': selectedFilter() === 'MEDIUM',
+        'text-white': selectedFilter() === 'MEDIUM',
+        'bg-none': selectedFilter() !== 'MEDIUM'
+      }"
+      (click)="filterBy('MEDIUM')"
+    >
+      MEDIUM
+    </button>
+    <button
+      class="border px-3 my-1 py-1 rounded me-2 border-gray-500 text-gray-500"
+      [ngClass]="{
+        'bg-red-500': selectedFilter() === 'HIGH',
+        'text-white': selectedFilter() === 'HIGH',
+        'bg-none': selectedFilter() !== 'HIGH'
+      }"
+      (click)="filterBy('HIGH')"
+    >
+      HIGH
+    </button>
+    <button
+      class="border px-3 my-1 py-1 rounded me-2 border-gray-500 text-gray-500"
+      [ngClass]="{
+        'bg-red-500': selectedFilter() === 'EMERGENCY',
+        'text-white': selectedFilter() === 'EMERGENCY',
+        'bg-none': selectedFilter() !== 'EMERGENCY'
+      }"
+      (click)="filterBy('EMERGENCY')"
+    >
+      EMERGENCY
+    </button>
   </div>
 
   <div *ngIf="loading" class="flex justify-center items-center py-8">
-    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+    <div
+      class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"
+    ></div>
     <span class="ml-2">Loading Requests...</span>
   </div>
-  
-  <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4">
+
+  <div
+    *ngIf="error"
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4"
+  >
     {{ error }}
-    <button (click)="loadRequests()" class="ml-4 underline hover:no-underline">Try Again</button>
+    <button (click)="loadRequests()" class="ml-4 underline hover:no-underline">
+      Try Again
+    </button>
   </div>
 
-  <div class="text-center p-5 bg-light rounded-4 shadow-sm mt-4" *ngIf="noRequestFound" style="color: #5B3711;">
-    <i class="bi bi-emoji-frown fs-1 mb-3" style="color: #F77F00;"></i>
+  <div
+    class="text-center p-5 bg-light rounded-4 shadow-sm mt-4"
+    *ngIf="noRequestFound"
+    style="color: #5b3711"
+  >
+    <i class="bi bi-emoji-frown fs-1 mb-3" style="color: #f77f00"></i>
     <h5 class="fw-bold">No Requests Found</h5>
   </div>
 

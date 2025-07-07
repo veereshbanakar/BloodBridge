@@ -70,7 +70,6 @@ export class AuthService {
   public token$ = this.tokenSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    // Check if user is already logged in on service initialization
     this.loadUserFromStorage();
   }
   registerDonor(registrationData: DonorRegistrationRequest): Observable<RegistrationResponse> {

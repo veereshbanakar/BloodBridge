@@ -3,7 +3,7 @@
     <div class="border rounded-xl p-5 bg-gray-100 border-gray-300 shadow">
       <div class="flex justify-between items-center">
         <div class="bg-red-500 text-xl text-white font-bold px-4 rounded-2xl">
-          A+
+         {{responses.bloodGroup}}
         </div>
         <div
           class="border-0 rounded-2xl py-1 bg-amber-200 font-bold text-red-400 px-2"
@@ -13,7 +13,7 @@
       </div>
       <div class="md:flex md:justify-between md:items-center">
         <div>
-          <p class="mt-2 font-bold">Varun</p>
+          <p class="mt-2 font-bold">{{responses.receiverName}}</p>
           <p class="text-xl font-semibold">Emergency Surgery Required</p>
           <p class="text-slate-600">
             Patient needs immediate blood transfusion for emergency surgery.
@@ -28,7 +28,7 @@
       </div>
 
       <div class="flex justify-between mt-2">
-        <p>📍City Hospital</p>
+        <p>📍{{responses.hospitalName}}</p>
         <p>⏰ 2 hours ago</p>
       </div>
     </div>

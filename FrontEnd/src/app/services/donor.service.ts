@@ -36,6 +36,20 @@ export interface UpdateProfileResponse {
   message: string;
 }
 
+export interface acceptRequestResponse{
+  status: string,
+  message: string
+}
+
+export interface DonorResponse {
+  id: string;
+  donorId: string;
+  requestId: string;
+  receiverName: string;
+  bloodGroup: string;
+  hospitalName: string;
+  acceptedAt: string; // ISO Date string
+}
 
 @Injectable({
   providedIn: 'root',
@@ -65,5 +79,12 @@ export class DonorService {
     const headers = this.getAuthHeaders();
     return this.http.patch<UpdateProfileResponse>(`${this.baseUrl}/update-profile`, profileData, {headers});
   }
-
+  acceptRequest(requestId: string):Observable<acceptRequestResponse>{
+    const headers = this.getAuthHeaders();
+    return this.http.get<acceptRequestResponse>(`${this.baseUrl}/update-status?requestId=${requestId}&status=ACCEPTED`,{headers});
+  }
+  getDonorResponses(): Observable<DonorResponse[]>{
+    const headers = this.getAuthHeaders();
+    return this.http.get<DonorResponse[]>(`${this.baseUrl}/accepted-requests`,{headers});
+  }
 }

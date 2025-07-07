@@ -6,7 +6,7 @@ import { Donor } from '../../../services/recipient.service';
 
 @Component({
   selector: 'app-donor-profile',
-  imports: [NavbarDonorComponent,ChatbotComponent,RouterModule],
+  imports: [NavbarDonorComponent,RouterModule],
   templateUrl: './donor-profile.component.html',
   styleUrl: './donor-profile.component.css'
 })

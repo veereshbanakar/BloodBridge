@@ -25,7 +25,7 @@ export class NewRequestComponent {
     { value: 'LOW', label: 'Low' },
     { value: 'MEDIUM', label: 'Medium' },
     { value: 'HIGH', label: 'High' },
-    { value: 'CRITICAL', label: 'Critical' }
+    { value: 'EMERGENCY', label: 'Emergency' }
   ];
 
   constructor(
