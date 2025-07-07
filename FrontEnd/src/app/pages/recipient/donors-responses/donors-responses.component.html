@@ -1,6 +1,23 @@
 <app-navbar-recipient></app-navbar-recipient>
 <div class="mt-15 mx-[10%]">
     <h1 class="mt-3 text-2xl font-medium">Donor Responses</h1>
-<app-response></app-response>
-<app-response></app-response>
+    <div *ngIf="loading" class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        <span class="ml-2">Loading Responses</span>
+      </div>
+    
+     
+      <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4">
+        {{ error }}
+        <button (click)="loadResponse()" class="ml-4 underline hover:no-underline">Try Again</button>
+      </div>
+    
+    
+      <div *ngIf="!loading && !error && acceptedRequests.length === 0" class="text-center py-8 text-gray-600">
+        <p>No Requests found.</p>
+      </div>
+    <div *ngFor = "let request of acceptedRequests;trackBy:trackByRequestId">
+        <app-response [request]="request"></app-response>
+    </div>
+
 </div>

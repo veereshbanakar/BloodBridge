@@ -35,7 +35,7 @@ export interface Request {
   contactNumber: number,
   reason: string,
   status: string,
-  acceptedBy: string
+  acceptedBy: Donor
 }
 export interface BloodRequest {
   bloodGroup: string;
@@ -81,6 +81,10 @@ export class RecipientService {
   submitBloodRequest(bloodRequest: BloodRequest): Observable<BloodRequestResponse> {
     const headers = this.getAuthHeaders();
     return this.http.post<BloodRequestResponse>(`${this.apiUrl}/requestingblood`, bloodRequest, { headers });
+  }
+  getAcceptedRequests(): Observable<RequestResponse> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<RequestResponse>(`${this.apiUrl}/viewallrequest`, {headers});
   }
 
 }

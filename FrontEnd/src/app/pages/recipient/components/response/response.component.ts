@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Request } from '../../../../services/recipient.service';
+
 
 @Component({
   selector: 'app-response',
@@ -7,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './response.component.css'
 })
 export class ResponseComponent {
-
+  @Input() request!: Request;
 }
