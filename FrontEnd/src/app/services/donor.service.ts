@@ -22,6 +22,19 @@ export interface RequestResponse {
   status: string;
   donorSpecificRequests: BloodRequest[];
 }
+export interface UpdateProfileData {
+  name: string;
+  email: string;
+  age: number;
+  blood_group: string;
+  phone: string;
+  location: string;
+}
+
+export interface UpdateProfileResponse {
+  status: string;
+  message: string;
+}
 
 
 @Injectable({
@@ -47,6 +60,10 @@ export class DonorService {
   getRequestsForDonor(): Observable<RequestResponse>{
     const headers = this.getAuthHeaders();
     return this.http.get<RequestResponse>(`${this.baseUrl}/get-all-request`,{headers});
+  }
+  updateProfile(profileData: UpdateProfileData): Observable<UpdateProfileResponse> {
+    const headers = this.getAuthHeaders();
+    return this.http.patch<UpdateProfileResponse>(`${this.baseUrl}/update-profile`, profileData, {headers});
   }
 
 }

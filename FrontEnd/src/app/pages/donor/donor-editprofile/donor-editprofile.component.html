@@ -1,9 +1,17 @@
 <app-navbar-donor></app-navbar-donor>
 <div class="flex justify-center">
-  <div
-    class="bg-white mt-20 border-0 shadow-2xl w-[90%] lg:w-[40%] p-5 rounded-2xl h-auto"
-  >
+  <div class="bg-white mt-20 border-0 shadow-2xl w-[90%] lg:w-[40%] p-5 rounded-2xl h-auto">
     <p class="text-red-700 font-bold text-center">Edit profile</p>
+    
+    <!-- Success/Error Message -->
+    <div *ngIf="message" class="mb-4 p-3 rounded-lg" 
+         [class.bg-green-100]="message.includes('successfully')"
+         [class.text-green-700]="message.includes('successfully')"
+         [class.bg-red-100]="!message.includes('successfully')"
+         [class.text-red-700]="!message.includes('successfully')">
+      {{ message }}
+    </div>
+
     <form (ngSubmit)="onSubmit()" #updateprofile="ngForm">
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">FULL NAME</p>
@@ -13,66 +21,94 @@
           name="name"
           [(ngModel)]="updateData.name"
           required
-          class="font-medium w-[100%] rounded-2xl"
-          value="Anish Kumar"
+          class="font-medium w-[100%] rounded-2xl border p-2"
+          placeholder="Enter your full name"
         />
       </div>
+      
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">EMAIL ADDRESS</p>
         <input
-          type="text"
-          id = "email"
-          name = "email"
+          type="email"
+          id="email"
+          name="email"
           [(ngModel)]="updateData.email"
           required
-          class="font-medium w-[100%] rounded-2xl"
-          value="anishyadav7853&#64;gmail.com"
+          class="font-medium w-[100%] rounded-2xl border p-2"
+          placeholder="Enter your email address"
         />
       </div>
+      
+      <div class="ps-4 p-2 rounded-xl">
+        <p class="text-red-700 font-medium">AGE</p>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          [(ngModel)]="updateData.age"
+          required
+          min="18"
+          max="65"
+          class="font-medium w-[100%] rounded-2xl border p-2"
+          placeholder="Enter your age"
+        />
+      </div>
+      
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">PHONE NUMBER</p>
         <input
-          type="text"
-          id = "phone"
-          name = "phone"
+          type="tel"
+          id="phone"
+          name="phone"
           [(ngModel)]="updateData.phone"
           required
-          class="font-medium w-[100%] rounded-2xl"
-          value="+91 987654321"
+          class="font-medium w-[100%] rounded-2xl border p-2"
+          placeholder="Enter your phone number"
         />
       </div>
+      
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">BLOOD GROUP</p>
-        <input
-          type="text"
-          id = "bloodgroup"
-          name = "bloodgroup"
-          [(ngModel)]="updateData.bloodgroup"
+        <select
+          id="bloodgroup"
+          name="bloodgroup"
+          [(ngModel)]="updateData.blood_group"
           required
-          class="font-medium w-[100%] rounded-2xl"
-          value="O+"
-        />
+          class="font-medium w-[100%] rounded-2xl border p-2"
+        >
+          <option value="" disabled>Select blood group</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
       </div>
+      
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">LOCATION</p>
         <input
           type="text"
-          id = "location"
-          name = "location"
+          id="location"
+          name="location"
           [(ngModel)]="updateData.location"
           required
-          class="font-medium w-[100%] rounded-2xl"
-          value="USA"
+          class="font-medium w-[100%] rounded-2xl border p-2"
+          placeholder="Enter your location"
         />
       </div>
-
-      <a href="/donor/editprofile"
-        ><button
-          class="cursor-pointer border-0 text-white font-bold text-xl w-[100%] mt-4 p-2 rounded-4xl bg-[#C0392B]"
-        >
-          Update Profile
-        </button></a
+      
+      <button
+        type="submit"
+        [disabled]="!updateprofile.form.valid || isLoading"
+        class="cursor-pointer border-0 text-white font-bold text-xl w-[100%] mt-4 p-2 rounded-4xl bg-[#C0392B] disabled:opacity-50 disabled:cursor-not-allowed"
       >
+        <span *ngIf="isLoading">Updating...</span>
+        <span *ngIf="!isLoading">Update Profile</span>
+      </button>
     </form>
   </div>
 </div>

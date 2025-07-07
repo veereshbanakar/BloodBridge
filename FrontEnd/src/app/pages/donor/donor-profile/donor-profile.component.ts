@@ -16,6 +16,7 @@ export class DonorProfileComponent implements OnInit {
   phone: string = "";
   blood_group: string = "";
   location:string = "";
+  age: string = "";
 
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class DonorProfileComponent implements OnInit {
       this.phone = user.phone;
       this.blood_group = user.blood_group;
       this.location = user.location;
+      this.age = user.age;
     }
   }
 
