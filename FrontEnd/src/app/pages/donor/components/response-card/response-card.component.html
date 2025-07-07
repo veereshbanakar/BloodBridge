@@ -8,28 +8,26 @@
         <div
           class="border-0 rounded-2xl py-1 bg-amber-200 font-bold text-red-400 px-2"
         >
-          URGENT
+          {{responses.urgencyLavel}}
         </div>
       </div>
       <div class="md:flex md:justify-between md:items-center">
         <div>
           <p class="mt-2 font-bold">{{responses.receiverName}}</p>
-          <p class="text-xl font-semibold">Emergency Surgery Required</p>
-          <p class="text-slate-600">
-            Patient needs immediate blood transfusion for emergency surgery.
-            Critical condition.
-          </p>
+          <p class="text-xl font-semibold">{{responses.reason}}</p>
         </div>
         <button
-          class="cursor-pointer bg-gray-700 text-white rounded-4xl mt-2 p-2 w-[100%] md:w-[auto]"
+          (click)="cancelRequest()"
+          class="cursor-pointer bg-gray-700 text-white rounded-4xl mt-2 p-2 w-[100%] md:w-[auto] flex items-center"
         >
-          Cancel Request
+        <span *ngIf="isCancelling" class="inline-block w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          {{isCancelling? 'Canceling....':'Cancel Request'}}
         </button>
       </div>
 
       <div class="flex justify-between mt-2">
         <p>📍{{responses.hospitalName}}</p>
-        <p>⏰ 2 hours ago</p>
+        <p></p>
       </div>
     </div>
   </div>

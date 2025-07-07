@@ -21,12 +21,14 @@ export class CardComponent {
     this.donorService.acceptRequest(this.request.id).subscribe({
       next:(res)=>{
         if(res.status=='success'){
+          this.isAccepting = false;
           this.router.navigate(['/donor/response']);
         }
 
       },
       error:(error)=>{
         console.log("Error accepting request");
+        this.isAccepting = false;
       }
     })
   }

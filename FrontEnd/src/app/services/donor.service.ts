@@ -49,6 +49,9 @@ export interface DonorResponse {
   bloodGroup: string;
   hospitalName: string;
   acceptedAt: string; // ISO Date string
+  reason: string;
+  urgencyLavel: string;
+  hospitalAddress: string;
 }
 
 @Injectable({
@@ -86,5 +89,9 @@ export class DonorService {
   getDonorResponses(): Observable<DonorResponse[]>{
     const headers = this.getAuthHeaders();
     return this.http.get<DonorResponse[]>(`${this.baseUrl}/accepted-requests`,{headers});
+  }
+  cancelRequest(requestId: string):Observable<acceptRequestResponse>{
+    const headers = this.getAuthHeaders();
+    return this.http.get<acceptRequestResponse>(`${this.baseUrl}/update-status?requestId=${requestId}&status=CANCEL`, {headers});
   }
 }

@@ -33,7 +33,6 @@ export class LoginComponent {
     this.isLoading = true;
     this.clearMessages();
 
-    console.log('Login submitted:', this.loginData);
     if(this.loginData.role=="recipient"){
       this.authService.loginReciever(this.loginData).subscribe({
         next: (response) => {

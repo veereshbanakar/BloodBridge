@@ -32,7 +32,6 @@ export class NavbarDonorComponent implements OnInit{
     this.route.url.subscribe(urlSegments => {
       this.currentUrl = urlSegments.join('/');
     });
-    console.log(this.currentUrl+" -- "+ this.home);
     if(this.currentUrl==this.home){
       this.homeIsActive= !this.homeIsActive;
     }else if(this.currentUrl==this.response){

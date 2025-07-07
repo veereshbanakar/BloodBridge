@@ -26,7 +26,6 @@ export class DonorResponseComponent implements OnInit {
     this.donorService.getDonorResponses().subscribe({
       next:(res)=>{
         this.isLoading = false;
-        console.log(res);
         this.allresponses = res;
 
       },

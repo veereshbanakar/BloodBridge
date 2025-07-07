@@ -57,8 +57,6 @@ export class NewRequestComponent {
       this.submitError = null;
 
       const formValue = this.bloodRequestForm.value;
-      
-      // Prepare the request data according to your API format
       const bloodRequest: BloodRequest = {
         bloodGroup: formValue.bloodGroup,
         urgencyLevel: formValue.urgencyLevel,
@@ -71,7 +69,6 @@ export class NewRequestComponent {
 
       this.bloodRequestService.submitBloodRequest(bloodRequest).subscribe({
         next: (response) => {
-          console.log(response);
           console.log('Blood request submitted successfully:', response);
           this.submitSuccess = true;
           this.isSubmitting = false;
