@@ -5,14 +5,14 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { environment } from '../../environment/environment';
 
-// Interface for login request
+
 export interface LoginRequest {
   email: string;
   password: string;
   role: string;
 }
 
-// Interface for user data (can be donor or receiver)
+
 export interface User {
   id: string;
   name: string;
@@ -24,21 +24,21 @@ export interface User {
   createdAt: string;
 }
 
-// Interface for login response
+
 export interface LoginResponse {
   token: string;
-  receiver?: User;  // for recipient login
-  donor?: User;     // for donor login (if different structure)
+  receiver?: User;
+  donor?: User;
   status: string;
 }
-// Interface for registration response
+
 export interface RegistrationResponse {
   status: string;
   message: string;
   user?: User;
   token?: string;
 }
-// Interface for donor registration request
+
 export interface DonorRegistrationRequest {
   name: string;
   email: string;
@@ -49,13 +49,14 @@ export interface DonorRegistrationRequest {
   phone: string;
 }
 
-// Interface for recipient registration request
+
 export interface RecipientRegistrationRequest {
   name: string;
   email: string;
   phone: string;
   address: string;
   password: string;
+  age:string;
 }
 
 @Injectable({
@@ -101,7 +102,8 @@ export class AuthService {
       email: registrationData.email,
       phone: registrationData.phone,
       location: registrationData.address,
-      password: registrationData.password
+      password: registrationData.password,
+      age:registrationData.age
     };
 
     const headers = new HttpHeaders({

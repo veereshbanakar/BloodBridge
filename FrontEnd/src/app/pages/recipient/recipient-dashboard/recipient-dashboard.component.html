@@ -11,6 +11,9 @@
     <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
     <span class="ml-2">Loading Requests</span>
   </div>
+  <div *ngIf="!loading && !error && requests.length === 0" class="text-center py-8 text-gray-600">
+    <p>No Requests found.</p>
+  </div>
   <div *ngIf = "!loading && !error && requests.length > 0">
     <app-my-request
       *ngFor="let request of requests; trackBy:trackByRequestId"

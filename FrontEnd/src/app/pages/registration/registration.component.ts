@@ -89,7 +89,8 @@ export class RegistrationComponent {
       email: formData.email,
       phone: formData.phone,
       address: formData.address,
-      password: formData.password
+      password: formData.password,
+      age: formData.age
     };
 
     this.authService.registerRecipient(registrationData).subscribe({

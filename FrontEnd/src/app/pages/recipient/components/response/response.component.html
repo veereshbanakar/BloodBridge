@@ -1,5 +1,5 @@
 <div class="mt-4">
-    <div class="border rounded-xl p-5 bg-gray-100 border-gray-300 shadow flex justify-between items-center">
+    <div class="border rounded-xl p-5 bg-gray-100 border-gray-300 shadow md:flex md:justify-between md:items-center">
       <!-- Left side: donor info -->
       <div>
         <div class="flex items-center mb-2">
@@ -15,10 +15,8 @@
         <p class="text-md text-gray-600">📞 {{request.acceptedBy.phone}}</p>
         <p class="text-md text-gray-600">📍 {{request.acceptedBy.location}}</p>
       </div>
-  
-      <!-- Right side: button vertically centered -->
       <button
-        class="bg-green-500 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-600 transition ml-4"
+        class="bg-green-500 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-600 transition ml-4 mt-2 md:mt-0"
       >
        Fulfill Request
       </button>

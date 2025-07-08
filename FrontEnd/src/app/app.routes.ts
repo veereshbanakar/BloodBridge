@@ -12,6 +12,8 @@ import { DonorsResponsesComponent } from './pages/recipient/donors-responses/don
 import { NewRequestComponent } from './pages/recipient/components/new-request/new-request.component';
 import { authGuard } from './guard/auth.guard';
 import { authDonorGuard } from './guard/auth-donor.guard';
+import { RecipientProfileComponent } from './pages/recipient/recipient-profile/recipient-profile.component';
+import { RecipientEditprofileComponent } from './pages/recipient/recipient-editprofile/recipient-editprofile.component';
 
 
 
@@ -47,6 +49,17 @@ export const routes: Routes = [
     },{
         path: 'recipient/responsebydonor',
         component: DonorsResponsesComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'recipient/profile',
+        component: RecipientProfileComponent,
+        canActivate: [authGuard]
+    }
+    ,
+    {
+        path: 'recipient/editprofile',
+        component: RecipientEditprofileComponent,
         canActivate: [authGuard]
     }
     ,
