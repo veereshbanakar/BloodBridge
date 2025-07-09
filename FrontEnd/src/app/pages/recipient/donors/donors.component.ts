@@ -26,7 +26,7 @@ export class DonorsComponent implements OnInit {
     this.error = null;
     this.recipientService.loadDonors();
     this.recipientService.donor$.subscribe((res)=>{
-      this.donors = res;
+      this.donors = res.filter((donor)=>donor.is_available==true); 
       this.loading = false;
     })
   }
