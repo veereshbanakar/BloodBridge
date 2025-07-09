@@ -16,6 +16,7 @@ export class RegistrationComponent {
   isLoading = false;
   errorMessage = '';
   successMessage = '';
+  bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
   @ViewChild('donorForm') donorForm!: NgForm;
   @ViewChild('recipientForm') recipientForm!: NgForm;

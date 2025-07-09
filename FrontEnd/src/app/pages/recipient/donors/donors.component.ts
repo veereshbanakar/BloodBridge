@@ -24,20 +24,11 @@ export class DonorsComponent implements OnInit {
   loadDonors(): void {
     this.loading = true;
     this.error = null;
-    
-    this.recipientService.getAllDonors().subscribe({
-      next: (response) => {
-        if (response.status === 'success') {
-          this.donors = response.donors.filter(donor => donor.is_available);
-          this.loading = false;
-        }
-      },
-      error: (err) => {
-        this.error = 'Failed to load donors. Please try again.';
-        this.loading = false;
-        console.error('Error loading donors:', err);
-      }
-    });
+    this.recipientService.loadDonors();
+    this.recipientService.donor$.subscribe((res)=>{
+      this.donors = res;
+      this.loading = false;
+    })
   }
 
   trackByDonorId(index: number, donor: Donor): string {

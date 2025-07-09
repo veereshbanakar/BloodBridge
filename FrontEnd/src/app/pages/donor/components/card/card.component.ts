@@ -22,7 +22,7 @@ export class CardComponent {
       next:(res)=>{
         if(res.status=='success'){
           this.isAccepting = false;
-          this.router.navigate(['/donor/response']);
+          this.donorService.loadRequests();
         }
 
       },

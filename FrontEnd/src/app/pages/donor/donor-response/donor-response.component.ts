@@ -18,12 +18,14 @@ export class DonorResponseComponent implements OnInit {
   isLoading:boolean = false;
   error:string  | null = null;
   ngOnInit(): void {
-      this.loadRequest();
+    this.donorService.loadResponses();
+    this.loadRequest();
+      
   }
   loadRequest():void{
     this.isLoading = true;
 
-    this.donorService.getDonorResponses().subscribe({
+    this.donorService.responses$.subscribe({
       next:(res)=>{
         this.isLoading = false;
         this.allresponses = res;

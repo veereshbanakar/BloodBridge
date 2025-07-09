@@ -17,7 +17,8 @@ export class NeabyRequestListComponent implements OnInit {
 
 
   ngOnInit(): void {
-      this.loadRequests();
+    this.donorSevice.loadRequests();
+    this.loadRequests();
   }
   constructor(private donorSevice: DonorService){}
   bloodRequests!:BloodRequest[];
@@ -30,13 +31,11 @@ export class NeabyRequestListComponent implements OnInit {
     this.loading = true;
     this.error = null;
 
-    this.donorSevice.getRequestsForDonor().subscribe({
+    this.donorSevice.requests$.subscribe({
       next: (res) => {
-        if(res.status === 'success'){
-        this.allBloodRequests = res.donorSpecificRequests;
+        this.allBloodRequests = res;
         this.loading = false;
         this.applyFilter();
-        }
       },
       error: (err) => {
         console.error('Failed to fetch blood requests:', err);

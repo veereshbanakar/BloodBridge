@@ -31,7 +31,8 @@ export class NewRequestComponent {
   constructor(
     private fb: FormBuilder,
     private bloodRequestService: RecipientService,
-    private router: Router
+    private router: Router,
+    private recipentService: RecipientService
   ) {
     this.bloodRequestForm = this.fb.group({
       bloodGroup: ['', Validators.required],
@@ -74,7 +75,7 @@ export class NewRequestComponent {
           this.isSubmitting = false;
           this.bloodRequestForm.reset();
           this.requestSubmitted.emit();
-
+          this.recipentService.loadAllRequestsByRecipient();
           setTimeout(() => {
             this.closeForm.emit();
           }, 2000);

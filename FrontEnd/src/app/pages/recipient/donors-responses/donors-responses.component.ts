@@ -25,13 +25,13 @@ export class DonorsResponsesComponent implements OnInit {
     this.loadResponse();
   }
   loadResponse():void{
-    this.recipientService.getAcceptedRequests().subscribe({
+
+    this.recipientService.loadAllRequestsByRecipient();
+    this.recipientService.requests$.subscribe({
       next: (data) => {
-        if(data.status=="success"){
-          const requests = data.requests;
+          const requests = data;
           this.acceptedRequests = requests.filter((req)=>req.status  == 'ACCEPTED');
           this.loading = false;
-        }
       },
       error: (err) => {
         console.error('Failed to load donor responses', err);

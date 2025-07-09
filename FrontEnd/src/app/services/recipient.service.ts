@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 
 export interface Donor {
@@ -51,11 +51,22 @@ export interface BloodRequestResponse {
   message?: string;
   status?: boolean;
 }
+export interface fullfillRequestResponse{
+  status: string,
+  message: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipientService {
+  private requestsSubject = new BehaviorSubject<Request[]>([]);
+  public requests$ = this.requestsSubject.asObservable();
+
+  private donorsSubject = new BehaviorSubject<Donor[]>([]);
+  public donor$ = this.donorsSubject.asObservable();
+
+
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -72,10 +83,21 @@ export class RecipientService {
     const headers = this.getAuthHeaders();
     return this.http.get<DonorResponse>(`${this.apiUrl}/get-all-donors`,{ headers });
   }
+  loadDonors(){
+    this.getAllDonors().subscribe((res)=>{
+      this.donorsSubject.next(res.donors);
+    })
+  }
 
   getAllRequestsByRecipient(): Observable<RequestResponse> {
     const headers = this.getAuthHeaders();
     return this.http.get<RequestResponse>(`${this.apiUrl}/viewallrequest`,{ headers })
+  }
+
+  loadAllRequestsByRecipient(){
+    this.getAllRequestsByRecipient().subscribe((res)=>{
+      this.requestsSubject.next(res.requests);
+    })
   }
 
   submitBloodRequest(bloodRequest: BloodRequest): Observable<BloodRequestResponse> {
@@ -85,6 +107,10 @@ export class RecipientService {
   getAcceptedRequests(): Observable<RequestResponse> {
     const headers = this.getAuthHeaders();
     return this.http.get<RequestResponse>(`${this.apiUrl}/viewallrequest`, {headers});
+  }
+  fullfillRequest(requestId: string):Observable<fullfillRequestResponse>{
+      const headers = this.getAuthHeaders();
+      return this.http.get<fullfillRequestResponse>(`${this.apiUrl}/update-status?requestId=${requestId}&status=CANCEL`, {headers});
   }
 
 }

@@ -21,7 +21,7 @@ export class ResponseCardComponent {
       next: (res)=>{
         if(res.status == 'success'){
           this.isCancelling = false;
-          this.router.navigate(['/donor/dashboard']);
+          this.donorSerivce.loadResponses();
         }
       },
       error:(error)=>{

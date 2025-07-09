@@ -25,24 +25,18 @@ export class RecipientDashboardComponent implements OnInit {
     }
 
     loadRequests(): void{
-
-      this.loading = true;
-      this.error = null;
-
-      this.recipentService.getAllRequestsByRecipient().subscribe({
-        next: (response)=>{
-          if(response.status === 'success'){
-            this.requests = response.requests;
-            this.loading = false;
-          }
-        },
-        error:(err)=>{
-          this.error = "Failed to load Requests. Please try again.";
+      this.loading  = true;
+      this.recipentService.loadAllRequestsByRecipient();
+      this.recipentService.requests$.subscribe({
+        next: (res) => {
+          this.requests = res.reverse();
           this.loading = false;
-          console.error('Error loading requests',err);
+        },
+        error: (err) => {
+          this.error = 'Failed to load requests';
+          this.loading = false;
         }
-      });
-
+      })
     }
 
     trackByRequestId(index: number, request: Request):string {

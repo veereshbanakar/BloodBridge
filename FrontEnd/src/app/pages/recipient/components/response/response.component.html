@@ -16,9 +16,11 @@
         <p class="text-md text-gray-600">📍 {{request.acceptedBy.location}}</p>
       </div>
       <button
+      (click)="fullfill()"
         class="bg-green-500 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-600 transition ml-4 mt-2 md:mt-0"
       >
-       Fulfill Request
+        <span *ngIf="isFullfilling" class="inline-block w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        {{isFullfilling? 'Fullfilling....': 'Fullfill Request'}}
       </button>
     </div>
   </div>

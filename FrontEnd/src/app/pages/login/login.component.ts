@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router ,RouterModule} from '@angular/router';
@@ -10,7 +10,18 @@ import { AuthService, LoginRequest } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+  ngOnInit(): void {
+      const currentUser = localStorage.getItem('userRole');
+      if(currentUser=='donor'){
+        this.router.navigate(['/donor/dashboard']);
+      }
+      else if(currentUser=='recipient'){
+        this.router.navigate(['/recipient/dashboard']);
+      }
+
+  }
   loginData: LoginRequest = {
     email: '',
     password: '',

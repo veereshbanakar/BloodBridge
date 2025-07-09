@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 
 
@@ -58,6 +58,13 @@ export interface DonorResponse {
   providedIn: 'root',
 })
 export class DonorService {
+
+  private requestsSubject = new BehaviorSubject<BloodRequest[]>([]);
+  public requests$ = this.requestsSubject.asObservable();
+
+  private responseSubject = new BehaviorSubject<DonorResponse[]>([]);
+  public responses$ = this.responseSubject.asObservable();
+
   private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
@@ -78,6 +85,13 @@ export class DonorService {
     const headers = this.getAuthHeaders();
     return this.http.get<RequestResponse>(`${this.baseUrl}/get-all-request`,{headers});
   }
+
+  loadRequests(){
+    this.getRequestsForDonor().subscribe((res)=>{
+      this.requestsSubject.next(res.donorSpecificRequests);
+    })
+  }
+
   updateProfile(profileData: UpdateProfileData): Observable<UpdateProfileResponse> {
     const headers = this.getAuthHeaders();
     return this.http.patch<UpdateProfileResponse>(`${this.baseUrl}/update-profile`, profileData, {headers});
@@ -89,6 +103,11 @@ export class DonorService {
   getDonorResponses(): Observable<DonorResponse[]>{
     const headers = this.getAuthHeaders();
     return this.http.get<DonorResponse[]>(`${this.baseUrl}/accepted-requests`,{headers});
+  }
+  loadResponses(){
+    this.getDonorResponses().subscribe((res)=>{
+      this.responseSubject.next(res);
+    })
   }
   cancelRequest(requestId: string):Observable<acceptRequestResponse>{
     const headers = this.getAuthHeaders();
