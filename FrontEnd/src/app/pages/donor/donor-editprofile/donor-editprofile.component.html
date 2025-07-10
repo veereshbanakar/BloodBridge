@@ -12,7 +12,8 @@
       {{ message }}
     </div>
 
-    <form (ngSubmit)="onSubmit()" #updateprofile="ngForm">
+    <form (ngSubmit)="onSubmit()" #updateprofile="ngForm" novalidate>
+      <!-- Full Name -->
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">FULL NAME</p>
         <input
@@ -20,12 +21,25 @@
           id="name"
           name="name"
           [(ngModel)]="updateData.name"
+          #nameField="ngModel"
           required
+          minlength="2"
+          maxlength="50"
+          pattern="^[a-zA-Z\s]+$"
           class="font-medium w-[100%] rounded-2xl border p-2"
+          [class.border-red-500]="nameField.invalid && (nameField.dirty || nameField.touched)"
+          [class.border-green-500]="nameField.valid && (nameField.dirty || nameField.touched)"
           placeholder="Enter your full name"
         />
+        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="nameField.errors?.['required']">Name is required</div>
+          <div *ngIf="nameField.errors?.['minlength']">Name must be at least 2 characters long</div>
+          <div *ngIf="nameField.errors?.['maxlength']">Name cannot exceed 50 characters</div>
+          <div *ngIf="nameField.errors?.['pattern']">Name can only contain letters and spaces</div>
+        </div>
       </div>
       
+      <!-- Email -->
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">EMAIL ADDRESS</p>
         <input
@@ -33,12 +47,21 @@
           id="email"
           name="email"
           [(ngModel)]="updateData.email"
+          #emailField="ngModel"
           required
+          email
           class="font-medium w-[100%] rounded-2xl border p-2"
+          [class.border-red-500]="emailField.invalid && (emailField.dirty || emailField.touched)"
+          [class.border-green-500]="emailField.valid && (emailField.dirty || emailField.touched)"
           placeholder="Enter your email address"
         />
+        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="emailField.errors?.['required']">Email is required</div>
+          <div *ngIf="emailField.errors?.['email']">Please enter a valid email address</div>
+        </div>
       </div>
       
+      <!-- Age -->
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">AGE</p>
         <input
@@ -46,14 +69,23 @@
           id="age"
           name="age"
           [(ngModel)]="updateData.age"
+          #ageField="ngModel"
           required
           min="18"
           max="65"
           class="font-medium w-[100%] rounded-2xl border p-2"
+          [class.border-red-500]="ageField.invalid && (ageField.dirty || ageField.touched)"
+          [class.border-green-500]="ageField.valid && (ageField.dirty || ageField.touched)"
           placeholder="Enter your age"
         />
+        <div *ngIf="ageField.invalid && (ageField.dirty || ageField.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="ageField.errors?.['required']">Age is required</div>
+          <div *ngIf="ageField.errors?.['min']">Age must be at least 18</div>
+          <div *ngIf="ageField.errors?.['max']">Age cannot exceed 65</div>
+        </div>
       </div>
       
+      <!-- Phone Number -->
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">PHONE NUMBER</p>
         <input
@@ -61,20 +93,32 @@
           id="phone"
           name="phone"
           [(ngModel)]="updateData.phone"
+          #phoneField="ngModel"
           required
+          pattern="^[0-9]{10}$"
           class="font-medium w-[100%] rounded-2xl border p-2"
-          placeholder="Enter your phone number"
+          [class.border-red-500]="phoneField.invalid && (phoneField.dirty || phoneField.touched)"
+          [class.border-green-500]="phoneField.valid && (phoneField.dirty || phoneField.touched)"
+          placeholder="Enter your 10-digit phone number"
         />
+        <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="phoneField.errors?.['required']">Phone number is required</div>
+          <div *ngIf="phoneField.errors?.['pattern']">Phone number must be exactly 10 digits</div>
+        </div>
       </div>
       
+      <!-- Blood Group -->
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">BLOOD GROUP</p>
         <select
           id="bloodgroup"
           name="bloodgroup"
           [(ngModel)]="updateData.blood_group"
+          #bloodGroupField="ngModel"
           required
           class="font-medium w-[100%] rounded-2xl border p-2"
+          [class.border-red-500]="bloodGroupField.invalid && (bloodGroupField.dirty || bloodGroupField.touched)"
+          [class.border-green-500]="bloodGroupField.valid && (bloodGroupField.dirty || bloodGroupField.touched)"
         >
           <option value="" disabled>Select blood group</option>
           <option value="A+">A+</option>
@@ -86,8 +130,12 @@
           <option value="O+">O+</option>
           <option value="O-">O-</option>
         </select>
+        <div *ngIf="bloodGroupField.invalid && (bloodGroupField.dirty || bloodGroupField.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="bloodGroupField.errors?.['required']">Blood group is required</div>
+        </div>
       </div>
       
+      <!-- Location -->
       <div class="ps-4 p-2 rounded-xl">
         <p class="text-red-700 font-medium">LOCATION</p>
         <input
@@ -95,12 +143,23 @@
           id="location"
           name="location"
           [(ngModel)]="updateData.location"
+          #locationField="ngModel"
           required
+          minlength="2"
+          maxlength="100"
           class="font-medium w-[100%] rounded-2xl border p-2"
+          [class.border-red-500]="locationField.invalid && (locationField.dirty || locationField.touched)"
+          [class.border-green-500]="locationField.valid && (locationField.dirty || locationField.touched)"
           placeholder="Enter your location"
         />
+        <div *ngIf="locationField.invalid && (locationField.dirty || locationField.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="locationField.errors?.['required']">Location is required</div>
+          <div *ngIf="locationField.errors?.['minlength']">Location must be at least 2 characters long</div>
+          <div *ngIf="locationField.errors?.['maxlength']">Location cannot exceed 100 characters</div>
+        </div>
       </div>
       
+      <!-- Submit Button -->
       <button
         type="submit"
         [disabled]="!updateprofile.form.valid || isLoading"
@@ -109,6 +168,11 @@
         <span *ngIf="isLoading">Updating...</span>
         <span *ngIf="!isLoading">Update Profile</span>
       </button>
+      
+      <!-- Form Status Debug (remove in production) -->
+      <div *ngIf="!updateprofile.form.valid" class="mt-2 text-sm text-gray-600">
+        <p>Please fix the errors above to enable the submit button.</p>
+      </div>
     </form>
   </div>
 </div>

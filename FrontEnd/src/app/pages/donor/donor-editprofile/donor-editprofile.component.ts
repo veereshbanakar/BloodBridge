@@ -22,6 +22,10 @@ export class DonorEditprofileComponent implements OnInit {
   };
 
   private currentUser: any = null;
+  isLoading = false;
+  message = '';
+
+  constructor(private donorService: DonorService, private router: Router) {}
 
   ngOnInit(): void {
     const currentUserData = localStorage.getItem('currentUser');
@@ -36,50 +40,100 @@ export class DonorEditprofileComponent implements OnInit {
     }
   }
 
-  isLoading = false;
-  message = '';
-
-  constructor(private donorService: DonorService, private router: Router) {}
-
   onSubmit() {
-    this.isLoading = true;
-    this.message = '';
+    if (this.isFormValid()) {
+      this.isLoading = true;
+      this.message = '';
 
-    this.donorService.updateProfile(this.updateData).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-        this.message = response.message;
-        console.log('Profile updated successfully:', response);
+      this.donorService.updateProfile(this.updateData).subscribe({
+        next: (response) => {
+          this.isLoading = false;
+          this.message = response.message;
+          console.log('Profile updated successfully:', response);
 
-        this.updateLocalStorage();
+          this.updateLocalStorage();
 
-        setTimeout(() => {
-          this.router.navigate(['/donor/profile']);
-        }, 1500);
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.message = 'Error updating profile. Please try again.';
-        console.error('Error updating profile:', error);
-      }
-    });
+          setTimeout(() => {
+            this.router.navigate(['/donor/profile']);
+          }, 1500);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.message = 'Error updating profile. Please try again.';
+          console.error('Error updating profile:', error);
+        }
+      });
+    } else {
+      this.message = 'Please fix the validation errors before submitting.';
+      this.markAllFieldsAsTouched();
+    }
+  }
+
+  private isFormValid(): boolean {
+    return this.isValidName() && 
+           this.isValidEmail() && 
+           this.isValidAge() && 
+           this.isValidPhone() && 
+           this.isValidBloodGroup() && 
+           this.isValidLocation();
+  }
+
+  private isValidName(): boolean {
+    const name = this.updateData.name?.trim();
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    return !!(name && 
+              name.length >= 2 && 
+              name.length <= 50 && 
+              nameRegex.test(name));
+  }
+
+  private isValidEmail(): boolean {
+    const email = this.updateData.email?.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return !!(email && emailRegex.test(email));
+  }
+
+  private isValidAge(): boolean {
+    const age = this.updateData.age;
+    return !!(age && age >= 18 && age <= 65);
+  }
+
+  private isValidPhone(): boolean {
+    const phone = this.updateData.phone?.trim();
+    const phoneRegex = /^[0-9]{10}$/;
+    return !!(phone && phoneRegex.test(phone));
+  }
+
+  private isValidBloodGroup(): boolean {
+    const validBloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+    return !!(this.updateData.blood_group && 
+              validBloodGroups.includes(this.updateData.blood_group));
+  }
+
+  private isValidLocation(): boolean {
+    const location = this.updateData.location?.trim();
+    return !!(location && 
+              location.length >= 2 && 
+              location.length <= 100);
+  }
+
+  private markAllFieldsAsTouched(): void {
+    console.log('All fields should be marked as touched for validation display');
   }
 
   private updateLocalStorage(): void {
     try {
-
       const currentUserData = localStorage.getItem('currentUser');
 
       if (currentUserData) {
-
         const existingUser = JSON.parse(currentUserData);
         const updatedUser = {
           ...existingUser,
-          name: this.updateData.name,
-          email: this.updateData.email,
-          phone: this.updateData.phone,
+          name: this.updateData.name?.trim(),
+          email: this.updateData.email?.trim(),
+          phone: this.updateData.phone?.trim(),
           blood_group: this.updateData.blood_group,
-          location: this.updateData.location,
+          location: this.updateData.location?.trim(),
           age: this.updateData.age
         };
 
@@ -90,5 +144,12 @@ export class DonorEditprofileComponent implements OnInit {
     } catch (error) {
       console.error('Error updating localStorage:', error);
     }
+  }
+  sanitizeInput(value: string): string {
+    return value?.trim() || '';
+  }
+
+  formatPhoneNumber(phone: string): string {
+    return phone.replace(/\D/g, '');
   }
 }
