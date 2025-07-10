@@ -51,83 +51,146 @@
       #donorForm="ngForm"
       class="space-y-4"
     >
-      <input
-        type="text"
-        placeholder="Name"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="name"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="email"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="password"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="number"
-        placeholder="Age"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="age"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="text"
-        placeholder="Blood Group"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="bloodGroup"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="text"
-        placeholder="Address"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="address"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="tel"
-        placeholder="Phone Number"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="phone"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
+      <!-- Name Field -->
+      <div>
+        <input
+          type="text"
+          placeholder="Name"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['name']"
+          name="name"
+          ngModel
+          required
+          minlength="2"
+          pattern="^[a-zA-Z\s]+$"
+          (input)="onNameChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['name']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['name'] }}
+        </div>
+      </div>
 
-      <!-- <label class="block text-sm font-medium text-gray-700">Medical Certificate</label>
-      <input 
-        type="file" 
-        (change)="onFileSelected($event)" 
-        class="w-full text-sm text-gray-600 rounded px-3 py-2 border border-gray-400 bg-gray-100" 
-        accept=".pdf,.jpg,.jpeg,.png"
-        [disabled]="isLoading"
-      /> -->
+      <!-- Email Field -->
+      <div>
+        <input
+          type="email"
+          placeholder="Email"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['email']"
+          name="email"
+          ngModel
+          required
+          email
+          (input)="onEmailChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['email']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['email'] }}
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['password']"
+          name="password"
+          ngModel
+          required
+          minlength="6"
+          (input)="onPasswordChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['password']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['password'] }}
+        </div>
+      </div>
+
+      <!-- Age Field -->
+      <div>
+        <input
+          type="number"
+          placeholder="Age"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['age']"
+          name="age"
+          ngModel
+          required
+          min="18"
+          max="65"
+          (input)="onAgeChange($event, true)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['age']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['age'] }}
+        </div>
+      </div>
+
+      <!-- Blood Group Field -->
+      <div>
+        <select
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['bloodGroup']"
+          name="bloodGroup"
+          ngModel
+          required
+          (change)="onBloodGroupChange($event)"
+          [disabled]="isLoading"
+        >
+          <option value="">Select Blood Group</option>
+          <option *ngFor="let group of bloodGroups" [value]="group">{{ group }}</option>
+        </select>
+        <div *ngIf="validationErrors['bloodGroup']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['bloodGroup'] }}
+        </div>
+      </div>
+
+      <!-- Address Field -->
+      <div>
+        <textarea
+          placeholder="Address"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border resize-vertical"
+          [class.border-red-500]="validationErrors['address']"
+          name="address"
+          ngModel
+          required
+          minlength="10"
+          rows="3"
+          (input)="onAddressChange($event)"
+          [disabled]="isLoading"
+        ></textarea>
+        <div *ngIf="validationErrors['address']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['address'] }}
+        </div>
+      </div>
+
+      <!-- Phone Field -->
+      <div>
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['phone']"
+          name="phone"
+          ngModel
+          required
+          pattern="[6-9][0-9]{9}"
+          maxlength="10"
+          (input)="onPhoneChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['phone']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['phone'] }}
+        </div>
+      </div>
 
       <button
         type="submit"
         class="bg-[#B91C1C] w-[100%] py-2 text-white rounded font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-        [disabled]="isLoading || !donorForm.valid"
+        [disabled]="isLoading || !donorForm.valid || !isFormValid()"
       >
         <span *ngIf="isLoading" class="mr-2">
           <svg
@@ -162,65 +225,127 @@
       #recipientForm="ngForm"
       class="space-y-4"
     >
-      <input
-        type="text"
-        placeholder="Name"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="name"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="email"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="tel"
-        placeholder="Phone Number"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="phone"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="number"
-        placeholder="Age"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="age"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="text"
-        placeholder="Address"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="address"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
-        name="password"
-        ngModel
-        required
-        [disabled]="isLoading"
-      />
+      <!-- Name Field -->
+      <div>
+        <input
+          type="text"
+          placeholder="Name"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['name']"
+          name="name"
+          ngModel
+          required
+          minlength="2"
+          pattern="^[a-zA-Z\s]+$"
+          (input)="onNameChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['name']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['name'] }}
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <input
+          type="email"
+          placeholder="Email"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['email']"
+          name="email"
+          ngModel
+          required
+          email
+          (input)="onEmailChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['email']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['email'] }}
+        </div>
+      </div>
+
+      <!-- Phone Field -->
+      <div>
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['phone']"
+          name="phone"
+          ngModel
+          required
+          pattern="[6-9][0-9]{9}"
+          maxlength="10"
+          (input)="onPhoneChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['phone']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['phone'] }}
+        </div>
+      </div>
+
+      <!-- Age Field -->
+      <div>
+        <input
+          type="number"
+          placeholder="Age"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['age']"
+          name="age"
+          ngModel
+          required
+          min="1"
+          max="120"
+          (input)="onAgeChange($event, false)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['age']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['age'] }}
+        </div>
+      </div>
+
+      <!-- Address Field -->
+      <div>
+        <textarea
+          placeholder="Address"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border resize-vertical"
+          [class.border-red-500]="validationErrors['address']"
+          name="address"
+          ngModel
+          required
+          minlength="10"
+          rows="3"
+          (input)="onAddressChange($event)"
+          [disabled]="isLoading"
+        ></textarea>
+        <div *ngIf="validationErrors['address']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['address'] }}
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          class="input w-[100%] rounded bg-gray-100 border-gray-400 px-3 py-2 border"
+          [class.border-red-500]="validationErrors['password']"
+          name="password"
+          ngModel
+          required
+          minlength="6"
+          (input)="onPasswordChange($event)"
+          [disabled]="isLoading"
+        />
+        <div *ngIf="validationErrors['password']" class="text-red-500 text-sm mt-1">
+          {{ validationErrors['password'] }}
+        </div>
+      </div>
 
       <button
         type="submit"
         class="bg-[#B91C1C] w-[100%] py-2 text-white rounded font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-        [disabled]="isLoading || !recipientForm.valid"
+        [disabled]="isLoading || !recipientForm.valid || !isFormValid()"
       >
         <span *ngIf="isLoading" class="mr-2">
           <svg

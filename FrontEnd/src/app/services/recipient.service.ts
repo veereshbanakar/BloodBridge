@@ -110,7 +110,7 @@ export class RecipientService {
   }
   fullfillRequest(requestId: string):Observable<fullfillRequestResponse>{
       const headers = this.getAuthHeaders();
-      return this.http.get<fullfillRequestResponse>(`${this.apiUrl}/update-status?requestId=${requestId}&status=CANCEL`, {headers});
+      return this.http.get<fullfillRequestResponse>(`${this.apiUrl}/update-status?requestId=${requestId}&status=FULFILLED`, {headers});
   }
 
 }
