@@ -28,7 +28,7 @@ export class DonorResponseComponent implements OnInit {
     this.donorService.responses$.subscribe({
       next:(res)=>{
         this.isLoading = false;
-        this.allresponses = res;
+        this.allresponses = res.filter((res)=>res.status=="ACCEPTED");
 
       },
       error: (err)=>{
