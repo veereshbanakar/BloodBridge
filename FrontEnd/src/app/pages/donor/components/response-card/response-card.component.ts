@@ -17,7 +17,7 @@ export class ResponseCardComponent {
 
   cancelRequest():void{
     this.isCancelling = true;
-    this.donorSerivce.cancelRequest(this.responses.requestId).subscribe({
+    this.donorSerivce.cancelRequest(this.responses.id).subscribe({
       next: (res)=>{
         if(res.status == 'success'){
           this.isCancelling = false;

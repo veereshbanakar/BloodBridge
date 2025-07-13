@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
+import { Donor } from './recipient.service';
 
 
 
@@ -43,15 +44,16 @@ export interface acceptRequestResponse{
 
 export interface DonorResponse {
   id: string;
-  donorId: string;
-  requestId: string;
+  receiverId: string;
   receiverName: string;
   bloodGroup: string;
+  urgencyLevel: string; 
   hospitalName: string;
-  acceptedAt: string; // ISO Date string
-  reason: string;
-  urgencyLavel: string;
   hospitalAddress: string;
+  contactNumber: string;
+  reason: string;
+  status: string;
+  acceptedBy: Donor;
 }
 
 @Injectable({
